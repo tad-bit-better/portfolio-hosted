@@ -4,6 +4,7 @@
 import { useState, useEffect, type ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Loader2, ShieldX } from 'lucide-react';
+import { Button } from '@/components/ui/button'; // Added import
 
 interface AccessGuardProps {
   children: ReactNode;
