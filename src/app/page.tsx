@@ -8,13 +8,14 @@ import { AppFooter } from '@/components/layout/AppFooter';
 import { SocialLinks } from '@/components/SocialLinks'; // For floating social links
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Home as HomeIcon, Briefcase, Zap, MessageCircle } from 'lucide-react';
+import { Home as HomeIconOriginal, Briefcase, Zap, MessageCircle } from 'lucide-react'; // Renamed Home to HomeIconOriginal
+import { AccessGuard } from '@/components/AccessGuard';
 
 
 // Simple Navbar Component (can be moved to its own file if it grows)
 function Navbar() {
   const navItems = [
-    { href: "#hero", label: "Home", Icon: HomeIcon },
+    { href: "#hero", label: "Home", Icon: HomeIconOriginal }, // Use the renamed HomeIconOriginal
     { href: "#projects", label: "Projects", Icon: Briefcase },
     { href: "#skills", label: "Skills", Icon: Zap },
     { href: "#contact", label: "Contact", Icon: MessageCircle },
@@ -44,21 +45,23 @@ function Navbar() {
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <HeroSection personalInfo={portfolioConfig.personalInfo} />
-        <ProjectsSection projects={portfolioConfig.projects} />
-        <SkillsSection skills={portfolioConfig.skills} />
-        <ContactSection contactConfig={portfolioConfig.contact} />
-      </main>
-      <AppFooter />
-      {/* Optional: Floating Social Links Bar */}
-      <div className="fixed bottom-4 right-4 z-50 hidden md:block opacity-0 animate-fade-in" style={{animationDelay: '1s'}}>
-        <div className="bg-card p-2 rounded-lg shadow-lg border">
-          <SocialLinks links={portfolioConfig.socialLinks} className="flex-col space-y-3 !space-x-0" />
+    <AccessGuard>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <HeroSection personalInfo={portfolioConfig.personalInfo} />
+          <ProjectsSection projects={portfolioConfig.projects} />
+          <SkillsSection skills={portfolioConfig.skills} />
+          <ContactSection contactConfig={portfolioConfig.contact} />
+        </main>
+        <AppFooter />
+        {/* Optional: Floating Social Links Bar */}
+        <div className="fixed bottom-4 right-4 z-50 hidden md:block opacity-0 animate-fade-in" style={{animationDelay: '1s'}}>
+          <div className="bg-card p-2 rounded-lg shadow-lg border">
+            <SocialLinks links={portfolioConfig.socialLinks} className="flex-col space-y-3 !space-x-0" />
+          </div>
         </div>
       </div>
-    </div>
+    </AccessGuard>
   );
 }
