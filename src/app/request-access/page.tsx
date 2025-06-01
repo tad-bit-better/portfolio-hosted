@@ -82,7 +82,7 @@ export default function RequestAccessPage() {
   const handleRequestAccess = async () => {
     if (!requesterName.trim() || requesterName.trim().length < 2) {
       setError("Please enter your name (at least 2 characters) to request access.");
-      setIsLoading(false);
+      setIsLoading(false); // Keep loading false if validation fails early
       return;
     }
     setIsLoading(true);
@@ -126,11 +126,11 @@ export default function RequestAccessPage() {
       alertTitle = "Access Issue";
       AlertIconComponent = ShieldAlert;
     } else if (lowerStatus.includes("pending")) {
-      alertVariant = "default";
+      alertVariant = "default"; // Or a specific variant for pending like "info" if you add one
       alertTitle = "Pending Approval";
       AlertIconComponent = Info;
     } else if (lowerStatus.includes("approved") || lowerStatus.includes("granted")) {
-        alertVariant = "default";
+        alertVariant = "default"; // Or "success"
         alertTitle = "Access Approved";
         AlertIconComponent = ShieldCheck;
     }
@@ -163,18 +163,18 @@ export default function RequestAccessPage() {
             </Alert>
           )}
 
-          {!initialLoadCheckDone && guestId && (
+          {!initialLoadCheckDone && guestId && ( // Only show if guestId was loaded from localStorage initially
             <div className="flex items-center justify-center p-3 text-muted-foreground">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Checking status for remembered ID...
             </div>
           )}
           
-          {guestId && initialLoadCheckDone && ( 
+          {guestId && initialLoadCheckDone && ( // Show this section if a guestId is active (from localStorage)
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
               <p className="text-sm text-foreground">Your remembered Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
-              <Button onClick={() => checkAccessStatus(guestId)} disabled={isLoading} className="w-full" variant="outline">
+              <Button onClick={() => checkAccessStatus(guestId)} disabled={isLoading && !inputGuestId} className="w-full" variant="outline">
                 {isLoading && !inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
                 Refresh My Access Status
               </Button>
@@ -195,7 +195,7 @@ export default function RequestAccessPage() {
                 placeholder="Enter Guest ID here"
                 value={inputGuestId}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setInputGuestId(e.target.value)}
-                className="pl-10 text-base"
+                className="pl-10 text-base" // Added padding for icon
                 disabled={isLoading}
               />
             </div>
@@ -222,7 +222,7 @@ export default function RequestAccessPage() {
                     placeholder="Enter your name"
                     value={requesterName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
-                    className="pl-10 text-base"
+                    className="pl-10 text-base" // Added padding for icon
                     disabled={isLoading}
                 />
             </div>
