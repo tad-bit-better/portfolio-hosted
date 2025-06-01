@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 // WARNING: In-memory store. Data will be lost on server restart. Use Firestore or another DB for production.
 interface GuestRecord {
   guestId: string;
+  name: string; // Added name field
   status: 'pending' | 'approved' | 'denied' | 'expired';
   requestedAt: number;
   approvedAt?: number;
@@ -25,13 +26,18 @@ function getBaseUrl(req: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const { action } = await request.json().catch(() => ({}));
+  const { action, name: requesterName } = await request.json().catch(() => ({ action: null, name: null }));
 
   if (action === 'request') {
+    if (!requesterName || typeof requesterName !== 'string' || requesterName.trim().length < 2) {
+      return NextResponse.json({ error: 'A valid name (at least 2 characters) is required to request access.' }, { status: 400 });
+    }
+
     const guestId = uuidv4();
     const now = Date.now();
     guestStore[guestId] = {
       guestId,
+      name: requesterName.trim(), // Store the requester's name
       status: 'pending',
       requestedAt: now,
       phoneNumber: ADMIN_PHONE_NUMBER,
@@ -42,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     // Simulate SMS notification
     console.log(`--------------------------------------------------------------------`);
-    console.log(`[ACCESS REQUEST] New guest access request.`);
+    console.log(`[ACCESS REQUEST] New guest access request from: ${requesterName.trim()}`);
     console.log(`Guest ID: ${guestId}`);
     console.log(`To approve, visit (or send this link to admin via SMS): ${approvalLink}`);
     console.log(`Notification for: ${ADMIN_PHONE_NUMBER}`);
@@ -75,10 +81,10 @@ export async function GET(request: NextRequest) {
     }
 
     if (record.status === 'pending') {
-      return NextResponse.json({ access: false, reason: 'pending', message: 'Access request is pending approval.' });
+      return NextResponse.json({ access: false, reason: 'pending', message: `Access request from ${record.name} is pending approval.` });
     }
     
-    return NextResponse.json({ access: false, reason: record.status, message: `Access status: ${record.status}` });
+    return NextResponse.json({ access: false, reason: record.status, message: `Access status for ${record.name}: ${record.status}` });
   }
   
   // This part handles the approval GET request from the link
@@ -94,7 +100,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (recordToApprove.status === 'approved') {
-       return NextResponse.json({ message: `Guest ID ${guestId} is already approved. Access expires at ${new Date(recordToApprove.expiresAt!).toLocaleString()}`});
+       return NextResponse.json({ message: `Guest ID ${guestId} for ${recordToApprove.name} is already approved. Access expires at ${new Date(recordToApprove.expiresAt!).toLocaleString()}`});
     }
 
     const now = Date.now();
@@ -102,13 +108,13 @@ export async function GET(request: NextRequest) {
     recordToApprove.approvedAt = now;
     recordToApprove.expiresAt = now + ACCESS_DURATION_HOURS * 60 * 60 * 1000;
 
-    console.log(`[ACCESS APPROVED] Guest ID ${guestId} approved. Access expires at ${new Date(recordToApprove.expiresAt).toLocaleString()}`);
+    console.log(`[ACCESS APPROVED] Guest ID ${guestId} for ${recordToApprove.name} approved. Access expires at ${new Date(recordToApprove.expiresAt).toLocaleString()}`);
     // In a real app, you might redirect to a success page or show a simple HTML confirmation.
     return new NextResponse(`
       <html>
         <body style="font-family: sans-serif; padding: 20px; text-align: center;">
           <h1>Access Approved!</h1>
-          <p>Guest ID: <strong>${guestId}</strong> has been approved.</p>
+          <p>Guest ID: <strong>${guestId}</strong> for <strong>${recordToApprove.name}</strong> has been approved.</p>
           <p>Access will expire in ${ACCESS_DURATION_HOURS} hours (at ${new Date(recordToApprove.expiresAt).toLocaleString()}).</p>
           <p><a href="/">Go to Portfolio</a></p>
         </body>

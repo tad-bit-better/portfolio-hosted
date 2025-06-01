@@ -6,15 +6,17 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Loader2, KeyRound, ShieldCheck, ShieldAlert, Info, RefreshCw, LogIn, PlusCircle } from 'lucide-react';
+import { Loader2, KeyRound, ShieldCheck, ShieldAlert, Info, RefreshCw, LogIn, PlusCircle, User as UserIcon } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from '@/components/ui/separator';
+import { Label } from '@/components/ui/label';
 
 export default function RequestAccessPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [initialLoadCheckDone, setInitialLoadCheckDone] = useState(false);
   const [guestId, setGuestId] = useState<string | null>(null); // From localStorage
   const [inputGuestId, setInputGuestId] = useState<string>(''); // For manual input
+  const [requesterName, setRequesterName] = useState<string>(''); // For new requests
   const [error, setError] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const router = useRouter();
@@ -22,17 +24,14 @@ export default function RequestAccessPage() {
   const checkAccessStatus = async (idToVerify: string, isManualCheck: boolean = false) => {
     if (!idToVerify.trim()) {
       if (isManualCheck) setError("Please enter a Guest ID to verify.");
-      setIsLoading(false); // Ensure loading is stopped if ID is empty for manual check
+      setIsLoading(false);
       return;
     }
     setIsLoading(true);
     setError(null);
-    // Keep previous status message if it's for a different ID, or clear if checking the same
-    // If checking a new manual ID, def clear previous status
     if (isManualCheck || idToVerify !== guestId) {
         setStatusMessage(null);
     }
-
 
     try {
       const response = await fetch(`/api/access?action=check&guestId=${idToVerify}`);
@@ -42,12 +41,11 @@ export default function RequestAccessPage() {
         if (data.access) {
           localStorage.setItem('guestId', idToVerify);
           setGuestId(idToVerify);
-          setInputGuestId(''); // Clear manual input on success
+          setInputGuestId(''); 
           router.push('/');
         } else {
           setStatusMessage(data.message || 'Access not granted.');
           if (data.reason === 'expired' || data.reason === 'denied' || data.reason === 'invalid_id') {
-            // If the currently stored guestId is now invalid, clear it
             if (idToVerify === guestId) {
               localStorage.removeItem('guestId');
               setGuestId(null);
@@ -56,17 +54,16 @@ export default function RequestAccessPage() {
         }
       } else {
         setError(data.error || `Failed to check status for ID: ${idToVerify}.`);
-        if (idToVerify === guestId) { // If the stored ID results in an error from API
+        if (idToVerify === guestId) { 
             localStorage.removeItem('guestId');
             setGuestId(null);
         }
       }
     } catch (err) {
-      setError('An network error occurred. Please try again.');
-      // Don't clear guestId on network error, could be temporary
+      setError('A network error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-      if (!isManualCheck) { // only set this if it was an auto check
+      if (!isManualCheck) { 
         setInitialLoadCheckDone(true);
       }
     }
@@ -78,11 +75,16 @@ export default function RequestAccessPage() {
       setGuestId(storedGuestId);
       checkAccessStatus(storedGuestId);
     } else {
-      setInitialLoadCheckDone(true); // No stored ID, so initial check is "done"
+      setInitialLoadCheckDone(true); 
     }
-  }, []); // Removed router from dependencies as it's stable
+  }, []); 
 
   const handleRequestAccess = async () => {
+    if (!requesterName.trim() || requesterName.trim().length < 2) {
+      setError("Please enter your name (at least 2 characters) to request access.");
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
     setError(null);
     setStatusMessage(null);
@@ -90,13 +92,14 @@ export default function RequestAccessPage() {
       const response = await fetch('/api/access', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'request' }),
+        body: JSON.stringify({ action: 'request', name: requesterName.trim() }),
       });
       const data = await response.json();
       if (response.ok && data.guestId) {
         localStorage.setItem('guestId', data.guestId);
         setGuestId(data.guestId);
-        setInputGuestId(''); // Clear manual input if a new one is requested
+        setInputGuestId(''); 
+        setRequesterName(''); // Clear name field on success
         setStatusMessage(data.message || 'Access requested successfully. Please wait for approval.');
       } else {
         setError(data.error || 'Failed to request access.');
@@ -127,7 +130,6 @@ export default function RequestAccessPage() {
       alertTitle = "Pending Approval";
       AlertIconComponent = Info;
     } else if (lowerStatus.includes("approved") || lowerStatus.includes("granted")) {
-        // This case should ideally not happen as it would redirect, but as a fallback
         alertVariant = "default";
         alertTitle = "Access Approved";
         AlertIconComponent = ShieldCheck;
@@ -168,7 +170,7 @@ export default function RequestAccessPage() {
             </div>
           )}
           
-          {guestId && initialLoadCheckDone && ( // Display remembered ID and its status/refresh button
+          {guestId && initialLoadCheckDone && ( 
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
               <p className="text-sm text-foreground">Your remembered Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
@@ -182,30 +184,56 @@ export default function RequestAccessPage() {
           <Separator className="my-6" />
           
           <div className="space-y-2">
-            <label htmlFor="manualGuestId" className="block text-sm font-medium text-foreground">
+            <Label htmlFor="manualGuestId" className="block text-sm font-medium text-foreground">
               {guestId ? "Have a different Guest ID?" : "Enter your Guest ID:"}
-            </label>
-            <Input
-              type="text"
-              id="manualGuestId"
-              placeholder="Enter Guest ID here"
-              value={inputGuestId}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => setInputGuestId(e.target.value)}
-              className="text-base"
-              disabled={isLoading}
-            />
+            </Label>
+            <div className="relative">
+              <LogIn className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                type="text"
+                id="manualGuestId"
+                placeholder="Enter Guest ID here"
+                value={inputGuestId}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setInputGuestId(e.target.value)}
+                className="pl-10 text-base"
+                disabled={isLoading}
+              />
+            </div>
             <Button onClick={handleVerifyManualId} disabled={isLoading || !inputGuestId.trim()} className="w-full">
-              {isLoading && inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <LogIn className="mr-2 h-4 w-4" />}
+              <LogIn className="mr-2 h-4 w-4" />
               Check & Use This ID
             </Button>
           </div>
 
         </CardContent>
-        <CardFooter className="flex-col space-y-3 pt-5">
+        <CardFooter className="flex-col space-y-4 pt-5">
           <Separator />
            <p className="text-sm text-muted-foreground pt-2">Need a new one?</p>
-          <Button onClick={handleRequestAccess} disabled={isLoading} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-            {isLoading && !guestId && !inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlusCircle className="mr-2 h-4 w-4" />}
+          
+          <div className="w-full space-y-2">
+            <Label htmlFor="requesterName" className="block text-sm font-medium text-foreground">
+              Your Name
+            </Label>
+            <div className="relative">
+                <UserIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                    type="text"
+                    id="requesterName"
+                    placeholder="Enter your name"
+                    value={requesterName}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
+                    className="pl-10 text-base"
+                    disabled={isLoading}
+                />
+            </div>
+          </div>
+
+          <Button 
+            onClick={handleRequestAccess} 
+            disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2} 
+            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+          >
+            {isLoading && !inputGuestId && !guestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlusCircle className="mr-2 h-4 w-4" />}
             Request New Access ID
           </Button>
         </CardFooter>
