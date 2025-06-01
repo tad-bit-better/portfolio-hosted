@@ -2,22 +2,24 @@
 // src/app/api/access/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
+import nodemailer from 'nodemailer';
 
 // WARNING: In-memory store. Data will be lost on server restart. Use Firestore or another DB for production.
 interface GuestRecord {
   guestId: string;
-  name: string; // Added name field
+  name: string;
   status: 'pending' | 'approved' | 'denied' | 'expired';
   requestedAt: number;
   approvedAt?: number;
   expiresAt?: number;
-  phoneNumber: string; // Admin's phone number for notification context (can be re-purposed or removed if only email is used)
+  phoneNumber: string; 
 }
 const guestStore: Record<string, GuestRecord> = {};
 
-const ADMIN_PHONE_NUMBER = '+918982266558'; // User's provided phone number - kept for GuestRecord structure
-const ADMIN_EMAIL_ADDRESS = process.env.ACCESS_ADMIN_EMAIL || 'admin@example.com'; // Configure your email here
-const ADMIN_SECRET = process.env.ACCESS_ADMIN_SECRET || 'supersecretadminpassword'; // Use environment variable for secret
+const ADMIN_PHONE_NUMBER = '+918982266558'; 
+const ADMIN_EMAIL_ADDRESS = process.env.ACCESS_ADMIN_EMAIL;
+const ADMIN_EMAIL_APP_PASSWORD = process.env.ACCESS_ADMIN_EMAIL_APP_PASSWORD;
+const ADMIN_SECRET = process.env.ACCESS_ADMIN_SECRET || 'supersecretadminpassword';
 const ACCESS_DURATION_HOURS = 24;
 
 // Helper function to get base URL
@@ -25,6 +27,46 @@ function getBaseUrl(req: NextRequest) {
   const protocol = req.headers.get('x-forwarded-proto') || 'http';
   const host = req.headers.get('host');
   return `${protocol}://${host}`;
+}
+
+async function sendApprovalEmail(guestId: string, requesterName: string, approvalLink: string) {
+  if (!ADMIN_EMAIL_ADDRESS || !ADMIN_EMAIL_APP_PASSWORD) {
+    console.error("Admin email credentials not configured. Skipping email notification.");
+    console.log(`MANUAL APPROVAL NEEDED: Request from ${requesterName}, Guest ID: ${guestId}, Approval Link: ${approvalLink}`);
+    return;
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: ADMIN_EMAIL_ADDRESS,
+      pass: ADMIN_EMAIL_APP_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: `"Portfolio Access System" <${ADMIN_EMAIL_ADDRESS}>`,
+    to: ADMIN_EMAIL_ADDRESS,
+    subject: `New Portfolio Access Request from ${requesterName}`,
+    html: `
+      <p>Hello Admin,</p>
+      <p>You have a new access request for your portfolio.</p>
+      <p><strong>Requester Name:</strong> ${requesterName}</p>
+      <p><strong>Guest ID:</strong> ${guestId}</p>
+      <p>To approve this request, click the link below:</p>
+      <p><a href="${approvalLink}" target="_blank">${approvalLink}</a></p>
+      <p>This link is valid for approval purposes only.</p>
+      <p>Access for the guest will be valid for ${ACCESS_DURATION_HOURS} hours after approval.</p>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log(`Approval email sent to ${ADMIN_EMAIL_ADDRESS} for guest ${requesterName} (ID: ${guestId})`);
+  } catch (error) {
+    console.error('Error sending approval email:', error);
+    console.log(`FAILED TO SEND EMAIL. MANUAL APPROVAL NEEDED: Request from ${requesterName}, Guest ID: ${guestId}, Approval Link: ${approvalLink}`);
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -39,35 +81,16 @@ export async function POST(request: NextRequest) {
     const now = Date.now();
     guestStore[guestId] = {
       guestId,
-      name: requesterName.trim(), // Store the requester's name
+      name: requesterName.trim(),
       status: 'pending',
       requestedAt: now,
-      phoneNumber: ADMIN_PHONE_NUMBER, // Retained in record as per existing structure
+      phoneNumber: ADMIN_PHONE_NUMBER, 
     };
 
     const baseUrl = getBaseUrl(request);
     const approvalLink = `${baseUrl}/api/access/approve?guestId=${guestId}&secret=${ADMIN_SECRET}`;
 
-    // Simulate Email Notification
-    console.log(`====================================================================`);
-    console.log(`SIMULATED EMAIL NOTIFICATION`);
-    console.log(`To: ${ADMIN_EMAIL_ADDRESS} (Configure this via ACCESS_ADMIN_EMAIL env var or update directly)`);
-    console.log(`From: Portfolio Access System <noreply@yourdomain.com>`);
-    console.log(`Subject: New Portfolio Access Request from ${requesterName.trim()}`);
-    console.log(`--------------------------------------------------------------------`);
-    console.log(`Hello Admin,`);
-    console.log(``);
-    console.log(`You have a new access request for your portfolio.`);
-    console.log(`Requester Name: ${requesterName.trim()}`);
-    console.log(`Guest ID: ${guestId}`);
-    console.log(``);
-    console.log(`To approve this request, click the link below:`);
-    console.log(`${approvalLink}`);
-    console.log(``);
-    console.log(`This link is valid for approval purposes only.`);
-    console.log(`Access for the guest will be valid for ${ACCESS_DURATION_HOURS} hours after approval.`);
-    console.log(`====================================================================`);
-
+    await sendApprovalEmail(guestId, requesterName.trim(), approvalLink);
 
     return NextResponse.json({ guestId, message: 'Access requested. Please wait for approval.' });
   }
@@ -87,7 +110,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (record.status === 'approved' && record.expiresAt && Date.now() > record.expiresAt) {
-      record.status = 'expired'; // Update status if expired
+      record.status = 'expired';
       return NextResponse.json({ access: false, reason: 'expired', message: 'Access has expired. Please request again.' });
     }
 
@@ -102,7 +125,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ access: false, reason: record.status, message: `Access status for ${record.name}: ${record.status}` });
   }
   
-  // This part handles the approval GET request from the link
   if (searchParams.has('secret') && guestId) { // Implicitly action=approve
     const secret = searchParams.get('secret');
     if (secret !== ADMIN_SECRET) {
@@ -123,14 +145,13 @@ export async function GET(request: NextRequest) {
     recordToApprove.approvedAt = now;
     recordToApprove.expiresAt = now + ACCESS_DURATION_HOURS * 60 * 60 * 1000;
 
-    console.log(`[ACCESS APPROVED] Guest ID ${guestId} for ${recordToApprove.name} approved. Access expires at ${new Date(recordToApprove.expiresAt).toLocaleString()}`);
-    // In a real app, you might redirect to a success page or show a simple HTML confirmation.
+    console.log(`[ACCESS APPROVED VIA LINK] Guest ID ${guestId} for ${recordToApprove.name} approved. Access expires at ${new Date(recordToApprove.expiresAt).toLocaleString()}`);
     return new NextResponse(`
       <html>
         <body style="font-family: sans-serif; padding: 20px; text-align: center;">
           <h1>Access Approved!</h1>
           <p>Guest ID: <strong>${guestId}</strong> for <strong>${recordToApprove.name}</strong> has been approved.</p>
-          <p>Access will expire in ${ACCESS_DURATION_HOURS} hours (at ${new Date(recordToApprove.expiresAt).toLocaleString()}).</p>
+          <p>Access will expire in ${ACCESS_DURATION_HOURS} hours (at ${new Date(recordToApprove.expiresAt!).toLocaleString()}).</p>
           <p><a href="/">Go to Portfolio</a></p>
         </body>
       </html>
@@ -139,4 +160,3 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ error: 'Invalid action or missing parameters' }, { status: 400 });
 }
-
