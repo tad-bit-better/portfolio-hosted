@@ -1,3 +1,4 @@
+
 // src/app/api/access/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,11 +11,12 @@ interface GuestRecord {
   requestedAt: number;
   approvedAt?: number;
   expiresAt?: number;
-  phoneNumber: string; // Admin's phone number for notification context
+  phoneNumber: string; // Admin's phone number for notification context (can be re-purposed or removed if only email is used)
 }
 const guestStore: Record<string, GuestRecord> = {};
 
-const ADMIN_PHONE_NUMBER = '+918982266558'; // User's provided phone number
+const ADMIN_PHONE_NUMBER = '+918982266558'; // User's provided phone number - kept for GuestRecord structure
+const ADMIN_EMAIL_ADDRESS = process.env.ACCESS_ADMIN_EMAIL || 'admin@example.com'; // Configure your email here
 const ADMIN_SECRET = process.env.ACCESS_ADMIN_SECRET || 'supersecretadminpassword'; // Use environment variable for secret
 const ACCESS_DURATION_HOURS = 24;
 
@@ -40,19 +42,32 @@ export async function POST(request: NextRequest) {
       name: requesterName.trim(), // Store the requester's name
       status: 'pending',
       requestedAt: now,
-      phoneNumber: ADMIN_PHONE_NUMBER,
+      phoneNumber: ADMIN_PHONE_NUMBER, // Retained in record as per existing structure
     };
 
     const baseUrl = getBaseUrl(request);
     const approvalLink = `${baseUrl}/api/access/approve?guestId=${guestId}&secret=${ADMIN_SECRET}`;
 
-    // Simulate SMS notification
+    // Simulate Email Notification
+    console.log(`====================================================================`);
+    console.log(`SIMULATED EMAIL NOTIFICATION`);
+    console.log(`To: ${ADMIN_EMAIL_ADDRESS} (Configure this via ACCESS_ADMIN_EMAIL env var or update directly)`);
+    console.log(`From: Portfolio Access System <noreply@yourdomain.com>`);
+    console.log(`Subject: New Portfolio Access Request from ${requesterName.trim()}`);
     console.log(`--------------------------------------------------------------------`);
-    console.log(`[ACCESS REQUEST] New guest access request from: ${requesterName.trim()}`);
+    console.log(`Hello Admin,`);
+    console.log(``);
+    console.log(`You have a new access request for your portfolio.`);
+    console.log(`Requester Name: ${requesterName.trim()}`);
     console.log(`Guest ID: ${guestId}`);
-    console.log(`To approve, visit (or send this link to admin via SMS): ${approvalLink}`);
-    console.log(`Notification for: ${ADMIN_PHONE_NUMBER}`);
-    console.log(`--------------------------------------------------------------------`);
+    console.log(``);
+    console.log(`To approve this request, click the link below:`);
+    console.log(`${approvalLink}`);
+    console.log(``);
+    console.log(`This link is valid for approval purposes only.`);
+    console.log(`Access for the guest will be valid for ${ACCESS_DURATION_HOURS} hours after approval.`);
+    console.log(`====================================================================`);
+
 
     return NextResponse.json({ guestId, message: 'Access requested. Please wait for approval.' });
   }
@@ -124,3 +139,4 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json({ error: 'Invalid action or missing parameters' }, { status: 400 });
 }
+
