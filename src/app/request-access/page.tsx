@@ -7,13 +7,15 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Loader2, KeyRound, ShieldCheck, ShieldAlert, Info, RefreshCw, LogIn, PlusCircle, User as UserIcon } from 'lucide-react';
+import { KeyRound, ShieldCheck, ShieldAlert, Info, RefreshCw, LogIn, PlusCircle, User as UserIcon } from 'lucide-react';
+import { OneUpMushroomLoader } from '@/components/ui/OneUpMushroomLoader';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from '@/components/ui/separator';
 import { Label } from '@/components/ui/label';
 
 export default function RequestAccessPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isPageLoading, setIsPageLoading] = useState(true); // For initial full page load check
   const [initialLoadCheckDone, setInitialLoadCheckDone] = useState(false);
   const [guestId, setGuestId] = useState<string | null>(null); // From localStorage
   const [inputGuestId, setInputGuestId] = useState<string>(''); // For manual input
@@ -25,10 +27,12 @@ export default function RequestAccessPage() {
   const checkAccessStatus = async (idToVerify: string, isManualCheck: boolean = false) => {
     if (!idToVerify.trim()) {
       if (isManualCheck) setError("Hold up! You need a Guest ID to check.");
+      if (!isManualCheck) setIsPageLoading(false);
       setIsLoading(false);
       return;
     }
     setIsLoading(true);
+    if (!isManualCheck) setIsPageLoading(true);
     setError(null);
     if (isManualCheck || idToVerify !== guestId) {
         setStatusMessage(null);
@@ -65,6 +69,7 @@ export default function RequestAccessPage() {
       setError('NETWORK ERROR! The server hamster fell off its wheel. Please try again.');
     } finally {
       setIsLoading(false);
+      setIsPageLoading(false);
       if (!isManualCheck) { 
         setInitialLoadCheckDone(true);
       }
@@ -75,18 +80,17 @@ export default function RequestAccessPage() {
     const storedGuestId = localStorage.getItem('guestId');
     if (storedGuestId) {
       setGuestId(storedGuestId);
-      // Automatically check status if guestId is found in localStorage
       checkAccessStatus(storedGuestId);
     } else {
-      setInitialLoadCheckDone(true); // If no guestId, no initial check needed
+      setIsPageLoading(false);
+      setInitialLoadCheckDone(true); 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependency array to run once on mount
+  }, []); 
 
   const handleRequestAccess = async () => {
     if (!requesterName.trim() || requesterName.trim().length < 2) {
       setError("Whoa there! Need your player name (min 2 chars) to request a key.");
-      setIsLoading(false); 
       return;
     }
     setIsLoading(true);
@@ -140,6 +144,14 @@ export default function RequestAccessPage() {
     }
   }
 
+  if (isPageLoading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4">
+        <OneUpMushroomLoader className="h-16 w-16 mb-4" />
+        <p className="text-lg text-foreground">Checking your saved Guest ID...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4">
@@ -166,20 +178,13 @@ export default function RequestAccessPage() {
               <AlertDescription>{statusMessage}</AlertDescription>
             </Alert>
           )}
-
-          {!initialLoadCheckDone && guestId && ( 
-            <div className="flex items-center justify-center p-3 text-muted-foreground">
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Checking your saved Guest ID...
-            </div>
-          )}
           
           {guestId && initialLoadCheckDone && ( 
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
               <p className="text-base text-foreground">Your current Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
               <Button onClick={() => checkAccessStatus(guestId)} disabled={isLoading && !inputGuestId} className="w-full" variant="outline">
-                {isLoading && !inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
+                {isLoading && !inputGuestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <RefreshCw className="mr-2 h-4 w-4" />}
                 Refresh My Access
               </Button>
             </div>
@@ -204,7 +209,7 @@ export default function RequestAccessPage() {
               />
             </div>
             <Button onClick={handleVerifyManualId} disabled={isLoading || !inputGuestId.trim()} className="w-full">
-              <LogIn className="mr-2 h-4 w-4" />
+              {isLoading && !!inputGuestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <LogIn className="mr-2 h-4 w-4" />}
               Check This ID
             </Button>
           </div>
@@ -237,7 +242,7 @@ export default function RequestAccessPage() {
             disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2} 
             className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
           >
-            {isLoading && !inputGuestId && !guestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlusCircle className="mr-2 h-4 w-4" />}
+            {isLoading && !inputGuestId && !guestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <PlusCircle className="mr-2 h-4 w-4" />}
             Request New Guest ID
           </Button>
         </CardFooter>

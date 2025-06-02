@@ -7,7 +7,8 @@ import type { Project } from '@/config/portfolio.config';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Tags, Loader2, Wand2, GamepadIcon } from 'lucide-react';
+import { ExternalLink, Tags, Wand2, GamepadIcon } from 'lucide-react';
+import { OneUpMushroomLoader } from '@/components/ui/OneUpMushroomLoader';
 import { suggestProjectTags } from '@/ai/flows/suggest-project-tags';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -49,7 +50,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           />
         </div>
         <CardTitle className="text-2xl font-headline flex items-center"><GamepadIcon className="mr-2 h-6 w-6 text-primary" />{project.title}</CardTitle>
-        <CardDescription className="text-muted-foreground h-20 overflow-y-auto leading-relaxed">{project.description}</CardDescription>
+        <CardDescription className="text-muted-foreground h-20 overflow-y-auto leading-relaxed text-base">{project.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="mb-4">
@@ -93,7 +94,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </Button>
         <Button onClick={handleSuggestTags} disabled={isLoadingTags} className="w-full sm:w-auto bg-primary hover:bg-primary/90 transition-transform hover:scale-105">
           {isLoadingTags ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <OneUpMushroomLoader className="mr-2 h-4 w-4" />
           ) : (
             <Wand2 className="mr-2 h-4 w-4" />
           )}

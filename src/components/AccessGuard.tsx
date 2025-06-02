@@ -4,8 +4,9 @@
 
 import { useState, useEffect, type ReactNode } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { Loader2, ShieldX, Ban } from 'lucide-react'; // Added Ban
-import { Button } from '@/components/ui/button'; 
+import { Ban } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { OneUpMushroomLoader } from '@/components/ui/OneUpMushroomLoader';
 
 interface AccessGuardProps {
   children: ReactNode;
@@ -66,7 +67,7 @@ export function AccessGuard({ children }: AccessGuardProps) {
   if (isLoading) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-4">
-        <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+        <OneUpMushroomLoader className="h-12 w-12 mb-4" />
         <p className="text-lg">Verifying Your VIP Pass...</p>
       </div>
     );
