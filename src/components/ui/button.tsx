@@ -49,6 +49,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     let buttonClasses = cn(buttonVariants({ variant, size, className }));
     if (isGoldenBlockWithBolts) {
+      // Ensure 'relative' for positioning children and 'overflow-hidden' for clipping the shine
       buttonClasses = cn(buttonClasses, "relative overflow-hidden");
     }
 
@@ -65,12 +66,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* Shine Element */}
             <span
               className={cn(
-                "absolute top-1/2 left-1/2", // Center the origin
-                "w-8 h-[200%]", // Shine element dimensions
-                "bg-white/25", // Shine color and transparency
-                "pointer-events-none z-0", // Ensure it's behind bolts if they overlap, and non-interactive
+                "absolute top-1/2 left-1/2", // Center the origin for transformation
+                "w-8 h-[200%]",             // Shine element dimensions (width 32px, height 200% of button)
+                "bg-white/25",              // Shine color and transparency
+                "pointer-events-none z-0",  // Ensure it's behind bolts and non-interactive
                 "opacity-0 group-hover:opacity-100", // Control visibility on hover
-                "group-hover:animate-glint-sweep" // Apply animation on hover
+                "group-hover:animate-glint-sweep"    // Apply animation on hover
               )}
             />
           </>
