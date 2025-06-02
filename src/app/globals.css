@@ -4,79 +4,79 @@
 
 @layer base {
   :root {
-    --background: 220 13% 96%; /* Very light gray #F0F2F5 */
-    --foreground: 220 13% 20%; /* Dark gray for text */
+    --background: 200 80% 90%; /* Light Sky Blue */
+    --foreground: 30 60% 15%; /* Dark Brown */
 
-    --muted: 220 13% 88%;
-    --muted-foreground: 220 13% 40%;
+    --muted: 200 60% 85%; /* Lighter Sky Blue */
+    --muted-foreground: 30 40% 35%; /* Slightly lighter brown */
 
-    --popover: 220 13% 96%;
-    --popover-foreground: 220 13% 20%;
+    --popover: 200 80% 90%; /* Light Sky Blue */
+    --popover-foreground: 30 60% 15%; /* Dark Brown */
 
-    --card: 220 13% 98%; /* Slightly lighter than background for cards */
-    --card-foreground: 220 13% 20%;
+    --card: 35 45% 80%; /* Light Tan/Beige - "brick" like */
+    --card-foreground: 30 60% 15%; /* Dark Brown */
 
-    --border: 220 13% 88%;
-    --input: 220 13% 88%;
+    --border: 35 30% 60%; /* Medium Tan/Brown for borders */
+    --input: 35 50% 85%; /* Lighter Tan for inputs */
 
-    --primary: 231 48% 63%; /* Deep indigo #6678D7 */
+    --primary: 0 90% 60%; /* Bright Red - Mario's Hat */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 231 48% 75%; /* Lighter Indigo */
-    --secondary-foreground: 220 13% 10%;
+    --secondary: 220 80% 60%; /* Bright Blue - Mario's Overalls */
+    --secondary-foreground: 0 0% 100%; /* White */
 
-    --accent: 16 100% 66%; /* Coral #FF7F50 */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 50 100% 60%; /* Bright Yellow - Coins */
+    --accent-foreground: 30 60% 15%; /* Dark Brown for text on yellow */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --ring: 231 48% 63%; /* Deep indigo for focus rings */
+    --ring: 50 100% 60%; /* Yellow for focus rings */
 
-    --radius: 0.5rem;
+    --radius: 0.25rem; /* Slightly blocky */
 
-    --chart-1: 231 48% 63%;
-    --chart-2: 16 100% 66%;
-    --chart-3: 210 40% 50%;
-    --chart-4: 160 50% 55%;
-    --chart-5: 280 50% 60%;
+    --chart-1: 0 90% 60%; /* Red */
+    --chart-2: 220 80% 60%; /* Blue */
+    --chart-3: 120 70% 50%; /* Green - Pipes/Luigi */
+    --chart-4: 50 100% 60%; /* Yellow */
+    --chart-5: 25 80% 55%; /* Orange */
   }
 
   .dark {
-    --background: 220 13% 10%; /* Dark gray for dark mode */
-    --foreground: 220 13% 96%; /* Light gray for text in dark mode */
+    --background: 240 30% 15%; /* Very Dark Blue/Purple - Night Sky */
+    --foreground: 200 70% 85%; /* Light Cyan/Blue Text - Glowing */
 
-    --muted: 220 13% 20%;
-    --muted-foreground: 220 13% 70%;
+    --muted: 240 20% 25%;
+    --muted-foreground: 200 50% 70%;
 
-    --popover: 220 13% 10%;
-    --popover-foreground: 220 13% 96%;
+    --popover: 240 30% 15%;
+    --popover-foreground: 200 70% 85%;
 
-    --card: 220 13% 12%;
-    --card-foreground: 220 13% 96%;
+    --card: 240 25% 20%; /* Slightly lighter Dark Blue/Purple */
+    --card-foreground: 200 70% 85%;
 
-    --border: 220 13% 25%;
-    --input: 220 13% 25%;
+    --border: 240 15% 30%;
+    --input: 240 15% 30%;
 
-    --primary: 231 48% 63%; /* Deep indigo */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 0 90% 65%; /* Slightly lighter Red for dark mode */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 231 48% 50%;
+    --secondary: 220 80% 65%; /* Slightly lighter Blue */
     --secondary-foreground: 0 0% 100%;
 
-    --accent: 16 100% 66%; /* Coral */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 50 100% 65%; /* Slightly lighter Yellow */
+    --accent-foreground: 240 30% 10%; /* Very Dark for text on yellow */
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --ring: 231 48% 63%;
+    --ring: 50 100% 65%;
 
-    --chart-1: 231 48% 63%;
-    --chart-2: 16 100% 66%;
-    --chart-3: 210 40% 60%;
-    --chart-4: 160 50% 65%;
-    --chart-5: 280 50% 70%;
+    --chart-1: 0 90% 65%;
+    --chart-2: 220 80% 65%;
+    --chart-3: 120 70% 55%;
+    --chart-4: 50 100% 65%;
+    --chart-5: 25 80% 60%;
   }
 }
 
@@ -88,6 +88,7 @@
     @apply bg-background text-foreground font-body;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    image-rendering: pixelated; /* For a sharper pixel art look on images if desired */
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-headline;
