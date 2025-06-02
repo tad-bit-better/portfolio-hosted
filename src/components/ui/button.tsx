@@ -45,12 +45,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     const effectiveVariant = variant || 'default';
-    const isGoldenBlockWithBolts = effectiveVariant === 'default';
+    // Ensure bolts and shine only apply if NOT asChild and variant is default
+    const isGoldenBlockWithBolts = effectiveVariant === 'default' && !asChild;
 
     let buttonClasses = cn(buttonVariants({ variant, size, className }));
     if (isGoldenBlockWithBolts) {
       // Ensure 'relative' for positioning children and 'overflow-hidden' for clipping the shine
-      buttonClasses = cn(buttonClasses, "relative overflow-hidden");
+      buttonClasses = cn(buttonClasses, "relative overflow-hidden group"); // Added group for group-hover
     }
 
     return (
