@@ -8,8 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 // For this case, we will wrap the content in page.tsx.
 
 export const metadata: Metadata = {
-  title: 'Devfolio - Pushpendra Singh',
-  description: 'Personal portfolio of Pushpendra Singh, driven by Next.js and GenAI.',
+  title: 'Pushpendra // Devcade - Level Up Your Projects!',
+  description: 'The retro-themed portfolio of Pushpendra Singh. Enter the Devcade and explore awesome projects!',
 };
 
 export default function RootLayout({

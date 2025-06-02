@@ -1,3 +1,4 @@
+
 // src/app/request-access/page.tsx
 'use client';
 
@@ -23,7 +24,7 @@ export default function RequestAccessPage() {
 
   const checkAccessStatus = async (idToVerify: string, isManualCheck: boolean = false) => {
     if (!idToVerify.trim()) {
-      if (isManualCheck) setError("Please enter a Guest ID to verify.");
+      if (isManualCheck) setError("Hold up! You need a Guest ID to check.");
       setIsLoading(false);
       return;
     }
@@ -42,9 +43,10 @@ export default function RequestAccessPage() {
           localStorage.setItem('guestId', idToVerify);
           setGuestId(idToVerify);
           setInputGuestId(''); 
+          setStatusMessage("ACCESS GRANTED! Welcome to the game world!");
           router.push('/');
         } else {
-          setStatusMessage(data.message || 'Access not granted.');
+          setStatusMessage(data.message || 'ACCESS DENIED. Better luck next time?');
           if (data.reason === 'expired' || data.reason === 'denied' || data.reason === 'invalid_id') {
             if (idToVerify === guestId) {
               localStorage.removeItem('guestId');
@@ -53,14 +55,14 @@ export default function RequestAccessPage() {
           }
         }
       } else {
-        setError(data.error || `Failed to check status for ID: ${idToVerify}.`);
+        setError(data.error || `SYSTEM ERROR checking ID: ${idToVerify}. Try again?`);
         if (idToVerify === guestId) { 
             localStorage.removeItem('guestId');
             setGuestId(null);
         }
       }
     } catch (err) {
-      setError('A network error occurred. Please try again.');
+      setError('NETWORK ERROR! The server hamster fell off its wheel. Please try again.');
     } finally {
       setIsLoading(false);
       if (!isManualCheck) { 
@@ -73,16 +75,18 @@ export default function RequestAccessPage() {
     const storedGuestId = localStorage.getItem('guestId');
     if (storedGuestId) {
       setGuestId(storedGuestId);
+      // Automatically check status if guestId is found in localStorage
       checkAccessStatus(storedGuestId);
     } else {
-      setInitialLoadCheckDone(true); 
+      setInitialLoadCheckDone(true); // If no guestId, no initial check needed
     }
-  }, []); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run once on mount
 
   const handleRequestAccess = async () => {
     if (!requesterName.trim() || requesterName.trim().length < 2) {
-      setError("Please enter your name (at least 2 characters) to request access.");
-      setIsLoading(false); // Keep loading false if validation fails early
+      setError("Whoa there! Need your player name (min 2 chars) to request a key.");
+      setIsLoading(false); 
       return;
     }
     setIsLoading(true);
@@ -99,13 +103,13 @@ export default function RequestAccessPage() {
         localStorage.setItem('guestId', data.guestId);
         setGuestId(data.guestId);
         setInputGuestId(''); 
-        setRequesterName(''); // Clear name field on success
-        setStatusMessage(data.message || 'Access requested successfully. Please wait for approval.');
+        setRequesterName(''); 
+        setStatusMessage(data.message || 'Request sent! Our admin will review your application for the VIP Pass.');
       } else {
-        setError(data.error || 'Failed to request access.');
+        setError(data.error || 'Oops! Request failed. Server gremlins strike again.');
       }
     } catch (err) {
-      setError('An error occurred while requesting access. Please try again.');
+      setError('Network hiccup! Could not send your request. Try blowing on the cartridge?');
     } finally {
       setIsLoading(false);
     }
@@ -116,22 +120,22 @@ export default function RequestAccessPage() {
   };
 
   let alertVariant: "default" | "destructive" = "default";
-  let alertTitle = "Status";
+  let alertTitle = "System Message";
   let AlertIconComponent: React.ElementType = Info;
 
   if (statusMessage) {
     const lowerStatus = statusMessage.toLowerCase();
     if (lowerStatus.includes("expired") || lowerStatus.includes("denied") || lowerStatus.includes("invalid_id") || lowerStatus.includes("not found")) {
       alertVariant = "destructive";
-      alertTitle = "Access Issue";
+      alertTitle = "Access Problem!";
       AlertIconComponent = ShieldAlert;
     } else if (lowerStatus.includes("pending")) {
-      alertVariant = "default"; // Or a specific variant for pending like "info" if you add one
-      alertTitle = "Pending Approval";
+      alertVariant = "default";
+      alertTitle = "Awaiting Admin Approval...";
       AlertIconComponent = Info;
     } else if (lowerStatus.includes("approved") || lowerStatus.includes("granted")) {
-        alertVariant = "default"; // Or "success"
-        alertTitle = "Access Approved";
+        alertVariant = "default";
+        alertTitle = "Access Approved!";
         AlertIconComponent = ShieldCheck;
     }
   }
@@ -142,16 +146,16 @@ export default function RequestAccessPage() {
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <KeyRound className="mx-auto h-12 w-12 text-primary mb-4" />
-          <CardTitle className="text-3xl font-bold">Portfolio Access</CardTitle>
+          <CardTitle className="text-3xl font-bold">Secret Dev Zone</CardTitle>
           <CardDescription className="text-muted-foreground">
-            This portfolio is private. Request access or enter an existing Guest ID.
+            This area is for VIPs only! Got a Guest ID or need to request one?
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && (
             <Alert variant="destructive">
               <ShieldAlert className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
+              <AlertTitle>ERROR!</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
@@ -163,20 +167,20 @@ export default function RequestAccessPage() {
             </Alert>
           )}
 
-          {!initialLoadCheckDone && guestId && ( // Only show if guestId was loaded from localStorage initially
+          {!initialLoadCheckDone && guestId && ( 
             <div className="flex items-center justify-center p-3 text-muted-foreground">
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Checking status for remembered ID...
+                Checking your saved Guest ID...
             </div>
           )}
           
-          {guestId && initialLoadCheckDone && ( // Show this section if a guestId is active (from localStorage)
+          {guestId && initialLoadCheckDone && ( 
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
-              <p className="text-base text-foreground">Your remembered Guest ID:</p>
+              <p className="text-base text-foreground">Your current Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
               <Button onClick={() => checkAccessStatus(guestId)} disabled={isLoading && !inputGuestId} className="w-full" variant="outline">
                 {isLoading && !inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
-                Refresh My Access Status
+                Refresh My Access
               </Button>
             </div>
           )}
@@ -185,7 +189,7 @@ export default function RequestAccessPage() {
           
           <div className="space-y-2">
             <Label htmlFor="manualGuestId" className="block text-sm font-medium text-foreground">
-              {guestId ? "Have a different Guest ID?" : "Enter your Guest ID:"}
+              {guestId ? "Got a different Guest ID?" : "Already have a Guest ID?"}
             </Label>
             <div className="relative">
               <LogIn className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
@@ -201,25 +205,25 @@ export default function RequestAccessPage() {
             </div>
             <Button onClick={handleVerifyManualId} disabled={isLoading || !inputGuestId.trim()} className="w-full">
               <LogIn className="mr-2 h-4 w-4" />
-              Check & Use This ID
+              Check This ID
             </Button>
           </div>
 
         </CardContent>
         <CardFooter className="flex-col space-y-4 pt-5">
           <Separator />
-           <p className="text-sm text-muted-foreground pt-2">Need a new one?</p>
+           <p className="text-sm text-muted-foreground pt-2">Need a new one? Request below!</p>
           
           <div className="w-full space-y-2">
             <Label htmlFor="requesterName" className="block text-sm font-medium text-foreground">
-              Your Name
+              Your Player Name
             </Label>
             <div className="relative">
                 <UserIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
                 <Input
                     type="text"
                     id="requesterName"
-                    placeholder="Enter your name"
+                    placeholder="E.g., MarioTheDev"
                     value={requesterName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
                     className="pl-10"
@@ -234,13 +238,13 @@ export default function RequestAccessPage() {
             className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
           >
             {isLoading && !inputGuestId && !guestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlusCircle className="mr-2 h-4 w-4" />}
-            Request New Access ID
+            Request New Guest ID
           </Button>
         </CardFooter>
       </Card>
       <p className="mt-8 text-sm text-muted-foreground text-center max-w-md">
-        Access is granted for 24 hours upon approval. If your access expires, you can request it again.
-        The site owner will be notified of your request (via console log for this demo).
+        Guest IDs grant access for 24 hours once approved by the Game Master. Expired? Request a new one!
+        The Game Master gets a ping for new requests (via console logs for this demo).
       </p>
     </div>
   );

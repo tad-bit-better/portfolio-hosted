@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useFormState } from 'react-dom';
@@ -10,7 +11,7 @@ import { SubmitButton } from '@/components/SubmitButton';
 import { submitContactForm, type ContactFormState } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { contactFormFields } from '@/config/portfolio.config';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { CheckCircle, XCircle, Send } from 'lucide-react'; // Added Send
 
 const initialState: ContactFormState = {
   message: '',
@@ -27,7 +28,7 @@ export function ContactForm() {
   useEffect(() => {
     if (state.message) {
       toast({
-        title: state.success ? 'Success!' : 'Uh Oh!',
+        title: state.success ? 'SUCCESS!' : 'ERROR!',
         description: state.message,
         variant: state.success ? 'default' : 'destructive',
         icon: state.success ? <CheckCircle className="h-5 w-5 text-green-500" /> : <XCircle className="h-5 w-5 text-red-500" />,
@@ -43,7 +44,7 @@ export function ContactForm() {
       {state.message && !state.success && !state.errors && (
          <Alert variant="destructive">
            <XCircle className="h-4 w-4" />
-           <AlertTitle>Error</AlertTitle>
+           <AlertTitle>ERROR!</AlertTitle>
            <AlertDescription>{state.message}</AlertDescription>
          </Alert>
       )}
@@ -117,7 +118,7 @@ export function ContactForm() {
       </div>
 
       <SubmitButton className="w-full bg-accent hover:bg-accent/90 text-accent-foreground py-3 text-base font-semibold shadow-md transition-transform hover:scale-105">
-        Send Message
+        <Send className="mr-2 h-4 w-4" /> Transmit Message
       </SubmitButton>
     </form>
   );

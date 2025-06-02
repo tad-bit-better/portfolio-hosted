@@ -1,7 +1,8 @@
+
 import type { PortfolioConfig } from '@/config/portfolio.config';
 import { ContactForm } from '@/components/ContactForm';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 interface ContactSectionProps {
   contactConfig: PortfolioConfig['contact'];
@@ -14,8 +15,8 @@ export function ContactSection({ contactConfig }: ContactSectionProps) {
         <div className="max-w-2xl mx-auto">
           <Card className="shadow-xl border-primary/20 animate-fade-in">
             <CardHeader className="text-center">
-              <Mail className="mx-auto h-12 w-12 text-accent mb-4" />
-              <CardTitle className="text-4xl md:text-5xl font-bold text-primary">Get In Touch</CardTitle>
+              <MessageCircle className="mx-auto h-12 w-12 text-accent mb-4" />
+              <CardTitle className="text-4xl md:text-5xl font-bold text-primary">Open Comms Channel</CardTitle>
               <CardDescription className="text-lg text-muted-foreground mt-2">
                 {contactConfig.introText}
               </CardDescription>

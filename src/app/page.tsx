@@ -8,24 +8,24 @@ import { AppFooter } from '@/components/layout/AppFooter';
 import { SocialLinks } from '@/components/SocialLinks'; // For floating social links
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Home as HomeIconOriginal, Briefcase, Zap, MessageCircle } from 'lucide-react'; // Renamed Home to HomeIconOriginal
+import { Home as HomeIconOriginal, Briefcase, Zap, MessageCircle, Gamepad2 } from 'lucide-react'; 
 import { AccessGuard } from '@/components/AccessGuard';
 
 
 // Simple Navbar Component (can be moved to its own file if it grows)
 function Navbar() {
   const navItems = [
-    { href: "#hero", label: "Home", Icon: HomeIconOriginal }, // Use the renamed HomeIconOriginal
-    { href: "#projects", label: "Projects", Icon: Briefcase },
-    { href: "#skills", label: "Skills", Icon: Zap },
-    { href: "#contact", label: "Contact", Icon: MessageCircle },
+    { href: "#hero", label: "Start", Icon: HomeIconOriginal }, 
+    { href: "#projects", label: "Levels", Icon: Briefcase },
+    { href: "#skills", label: "Power-Ups", Icon: Zap },
+    { href: "#contact", label: "Comms", Icon: MessageCircle },
   ];
 
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md shadow-sm p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold font-headline text-primary hover:text-accent transition-colors">
-          {portfolioConfig.personalInfo.name.split(' ')[0]} // Devfolio
+        <Link href="/" className="text-2xl font-bold font-headline text-primary hover:text-accent transition-colors flex items-center">
+          <Gamepad2 className="mr-2 h-6 w-6" /> {portfolioConfig.personalInfo.name.split(' ')[0]}'s // Devcade
         </Link>
         <div className="hidden md:flex space-x-2">
           {navItems.map(item => (

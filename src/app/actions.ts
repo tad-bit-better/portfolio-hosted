@@ -1,12 +1,13 @@
+
 // src/app/actions.ts
 'use server';
 
 import { z } from 'zod';
 
 const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters long."),
-  email: z.string().email("Please enter a valid email address."),
-  message: z.string().min(10, "Message must be at least 10 characters long."),
+  name: z.string().min(2, "Name must be at least 2 characters, brave adventurer!"),
+  email: z.string().email("Invalid email format. Is your comms link correct?"),
+  message: z.string().min(10, "Message too short. What's your quest? (min 10 chars)"),
 });
 
 export interface ContactFormState {
@@ -40,7 +41,7 @@ export async function submitContactForm(
 
   if (!validatedFields.success) {
     return {
-      message: "Validation failed. Please check your input.",
+      message: "VALIDATION FAILED! Check your inputs, hero.",
       success: false,
       errors: validatedFields.error.flatten().fieldErrors,
       fieldValues: { name, email, message },
@@ -48,11 +49,10 @@ export async function submitContactForm(
   }
 
   // In a real app, you would integrate with an email service or database here.
-  // For example, using Nodemailer or AWS SES.
-  console.log("Contact Form Submission Attempt:");
-  console.log("Name:", validatedFields.data.name);
-  console.log("Email:", validatedFields.data.email);
-  console.log("Message:", validatedFields.data.message);
+  console.log("Contact Form Submission Attempt (Retro Edition):");
+  console.log("Player Name:", validatedFields.data.name);
+  console.log("Comms Link:", validatedFields.data.email);
+  console.log("Quest Log:", validatedFields.data.message);
 
   // Simulate an API call
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -62,14 +62,14 @@ export async function submitContactForm(
 
   if (submissionSuccessful) {
     return {
-      message: "Thank you! Your message has been sent successfully. I'll get back to you soon.",
+      message: "MESSAGE SENT! Your transmission was successful. I'll warp a reply soon!",
       success: true,
       errors: null,
       fieldValues: { name: "", email: "", message: "" }, // Clear fields on success
     };
   } else {
     return {
-      message: "Sorry, there was an error sending your message. Please try again later.",
+      message: "TRANSMISSION FAILED! Comms are down. Please try again later, brave one.",
       success: false,
       errors: null,
       fieldValues: { name, email, message },

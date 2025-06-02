@@ -1,8 +1,9 @@
+
 import Image from 'next/image';
 import type { PortfolioConfig } from '@/config/portfolio.config';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Gamepad2 } from 'lucide-react';
 
 interface HeroSectionProps {
   personalInfo: PortfolioConfig['personalInfo'];
@@ -23,8 +24,8 @@ export function HeroSection({ personalInfo }: HeroSectionProps) {
             data-ai-hint={personalInfo.profileImageHint}
           />
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary">
-          {personalInfo.name}
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary flex items-center justify-center">
+           <Gamepad2 className="mr-3 h-10 w-10" /> {personalInfo.name}
         </h1>
         <h2 className="text-2xl md:text-3xl font-headline text-foreground mb-6">
           {personalInfo.title}
@@ -34,10 +35,10 @@ export function HeroSection({ personalInfo }: HeroSectionProps) {
         </p>
         <div className="space-x-4">
           <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg transform transition-transform duration-300 hover:scale-105">
-            <Link href="#projects">View My Work <ArrowDown className="ml-2 h-5 w-5" /></Link>
+            <Link href="#projects">View My Levels <ArrowDown className="ml-2 h-5 w-5" /></Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="shadow-lg transform transition-transform duration-300 hover:scale-105">
-            <Link href="#contact">Get In Touch</Link>
+            <Link href="#contact">Open Comms</Link>
           </Button>
         </div>
       </div>
