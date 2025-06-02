@@ -42,18 +42,40 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    // Determine if this button should get the "golden block" treatment (bolts)
+    // cva uses 'default' if variant is undefined.
+    const effectiveVariant = variant || 'default'; 
+
+    const isGoldenBlockWithBolts = effectiveVariant === 'default';
+
+    let buttonClasses = cn(buttonVariants({ variant, size, className }));
+    if (isGoldenBlockWithBolts) {
+      // Ensure 'relative' for bolt positioning.
+      // The base variant might already have it, but explicit is safer.
+      buttonClasses = cn(buttonClasses, "relative"); 
+    }
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
+      <Comp className={buttonClasses} ref={ref} {...props}>
+        {children}
+        {isGoldenBlockWithBolts && (
+          <>
+            {/* Top-left bolt */}
+            <span className="absolute top-[3px] left-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            {/* Top-right bolt */}
+            <span className="absolute top-[3px] right-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            {/* Bottom-left bolt */}
+            <span className="absolute bottom-[3px] left-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            {/* Bottom-right bolt */}
+            <span className="absolute bottom-[3px] right-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+          </>
+        )}
+      </Comp>
     )
   }
 )
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
-
