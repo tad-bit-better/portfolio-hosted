@@ -11,11 +11,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[3px_3px_0px_hsl(var(--foreground))] hover:brightness-110 active:shadow-[1px_1px_0px_hsl(var(--foreground))] active:translate-x-[2px] active:translate-y-[2px] active:brightness-90",
+          "bg-card text-card-foreground shadow-[3px_3px_0px_hsl(var(--foreground))] hover:brightness-110 active:shadow-[1px_1px_0px_hsl(var(--foreground))] active:translate-x-[2px] active:translate-y-[2px] active:brightness-90",
         destructive:
           "bg-destructive text-destructive-foreground shadow-[3px_3px_0px_hsl(var(--foreground))] hover:bg-destructive/90 active:shadow-[1px_1px_0px_hsl(var(--foreground))] active:translate-x-[2px] active:translate-y-[2px] active:bg-destructive/80",
         outline:
-          "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground active:bg-primary/90 active:translate-y-px",
+          "border-2 border-foreground bg-transparent text-foreground hover:bg-card hover:text-card-foreground active:bg-card/90 active:translate-y-px",
         secondary:
           "bg-secondary text-secondary-foreground shadow-[3px_3px_0px_hsl(var(--foreground))] hover:brightness-110 active:shadow-[1px_1px_0px_hsl(var(--foreground))] active:translate-x-[2px] active:translate-y-[2px] active:brightness-90",
         ghost: "hover:bg-accent hover:text-accent-foreground active:bg-accent/90 active:translate-y-px active:scale-[0.98]",
