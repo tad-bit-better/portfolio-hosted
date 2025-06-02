@@ -8,15 +8,15 @@ import { AppFooter } from '@/components/layout/AppFooter';
 import { SocialLinks } from '@/components/SocialLinks'; // For floating social links
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Home as HomeIconOriginal, Briefcase, Zap, MessageCircle, Gamepad2 } from 'lucide-react'; 
+import { Home as HomeIcon, Map, Zap, MessageCircle, Gamepad2 } from 'lucide-react'; 
 import { AccessGuard } from '@/components/AccessGuard';
 
 
 // Simple Navbar Component (can be moved to its own file if it grows)
 function Navbar() {
   const navItems = [
-    { href: "#hero", label: "Start", Icon: HomeIconOriginal }, 
-    { href: "#projects", label: "Levels", Icon: Briefcase },
+    { href: "#hero", label: "Start", Icon: HomeIcon }, 
+    { href: "#projects", label: "Levels", Icon: Map },
     { href: "#skills", label: "Power-Ups", Icon: Zap },
     { href: "#contact", label: "Comms", Icon: MessageCircle },
   ];

@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Twitter, Briefcase, Code, Brain, Zap, BarChart, Target, Eye, Mail, User, MessageSquare, Gamepad2, ShieldQuestion, Trophy, Settings2 } from 'lucide-react';
+import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Map } from 'lucide-react';
 
 export interface Project {
   id: string;
@@ -81,9 +81,9 @@ export const portfolioConfig: PortfolioConfig = {
   skills: [
     { name: "JavaScript / TypeScript", level: 95, Icon: Code },
     { name: "React / Next.js", level: 90, Icon: Zap },
-    { name: "Node.js / Express", level: 85, Icon: Settings2 }, // Changed Briefcase
+    { name: "Node.js / Express", level: 85, Icon: Settings2 },
     { name: "Python (AI/ML)", level: 80, Icon: Brain },
-    { name: "Databases (SQL/NoSQL)", level: 88, Icon: BarChart },
+    { name: "Databases (SQL/NoSQL)", level: 88, Icon: Database },
     { name: "Cloud Platforms (AWS/GCP)", level: 75, Icon: Target },
     { name: "UI/UX Design Principles", level: 70, Icon: Eye },
   ],
@@ -93,7 +93,7 @@ export const portfolioConfig: PortfolioConfig = {
     { platform: "Twitter", url: "https://twitter.com/pushpendra", Icon: Twitter },
   ],
   contact: {
-    email: "contact@pushpendra.dev", // Keep this professional for actual use
+    email: "contact@pushpendra.dev",
     introText: "Ready to team up or got a side quest? Drop a message in the comms channel!",
   },
 };
