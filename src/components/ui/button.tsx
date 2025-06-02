@@ -43,21 +43,35 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
     const effectiveVariant = variant || 'default';
-    // Ensure bolts and shine only apply if NOT asChild and variant is default
-    const isGoldenBlockWithBolts = effectiveVariant === 'default' && !asChild;
 
-    let buttonClasses = cn(buttonVariants({ variant, size, className }));
-    if (isGoldenBlockWithBolts) {
-      // Ensure 'relative' for positioning children and 'overflow-hidden' for clipping the shine
-      buttonClasses = cn(buttonClasses, "relative overflow-hidden group"); // Added group for group-hover
+    // Determine if the special golden block styling (bolts, shine, group class) should apply.
+    // This styling is ONLY for actual <button> elements of the 'default' variant.
+    const applyGoldenBlockStyling = !asChild && effectiveVariant === 'default';
+
+    let buttonBaseClasses = buttonVariants({ variant: effectiveVariant, size, className });
+    let finalButtonClasses = buttonBaseClasses;
+
+    if (applyGoldenBlockStyling) {
+      finalButtonClasses = cn(buttonBaseClasses, "relative overflow-hidden group");
     }
 
+    if (asChild) {
+      // When asChild is true, Slot handles rendering the child with merged props.
+      // The 'group' class for hover effects on golden blocks is not added to Slot itself,
+      // as those effects are tied to the decorative elements within the actual button.
+      return (
+        <Slot className={finalButtonClasses} ref={ref} {...props}>
+          {children}
+        </Slot>
+      );
+    }
+
+    // For a regular <button> element
     return (
-      <Comp className={buttonClasses} ref={ref} {...props}>
+      <button className={finalButtonClasses} ref={ref} {...props}>
         {children}
-        {isGoldenBlockWithBolts && (
+        {applyGoldenBlockStyling && (
           <>
             {/* Bolts */}
             <span className="absolute top-[4px] left-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
@@ -71,14 +85,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 "w-8 h-[200%]",             // Shine element dimensions (width 32px, height 200% of button)
                 "bg-white/25",              // Shine color and transparency
                 "pointer-events-none z-0",  // Ensure it's behind bolts and non-interactive
-                "opacity-0 group-hover:opacity-100", // Control visibility on hover
+                "opacity-0 group-hover:opacity-100", // Control visibility on hover (relies on 'group' on parent button)
                 "group-hover:animate-glint-sweep"    // Apply animation on hover
               )}
             />
           </>
         )}
-      </Comp>
-    )
+      </button>
+    );
   }
 )
 Button.displayName = "Button"
