@@ -63,13 +63,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isGoldenBlockWithBolts && (
           <>
             {/* Top-left bolt */}
-            <span className="absolute top-[3px] left-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            <span className="absolute top-[4px] left-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
             {/* Top-right bolt */}
-            <span className="absolute top-[3px] right-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            <span className="absolute top-[4px] right-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
             {/* Bottom-left bolt */}
-            <span className="absolute bottom-[3px] left-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            <span className="absolute bottom-[4px] left-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
             {/* Bottom-right bolt */}
-            <span className="absolute bottom-[3px] right-[3px] w-[3px] h-[3px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            <span className="absolute bottom-[4px] right-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
           </>
         )}
       </Comp>
