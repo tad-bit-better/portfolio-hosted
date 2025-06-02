@@ -44,17 +44,12 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-    // Determine if this button should get the "golden block" treatment (bolts)
-    // cva uses 'default' if variant is undefined.
-    const effectiveVariant = variant || 'default'; 
-
+    const effectiveVariant = variant || 'default';
     const isGoldenBlockWithBolts = effectiveVariant === 'default';
 
     let buttonClasses = cn(buttonVariants({ variant, size, className }));
     if (isGoldenBlockWithBolts) {
-      // Ensure 'relative' for bolt positioning.
-      // The base variant might already have it, but explicit is safer.
-      buttonClasses = cn(buttonClasses, "relative"); 
+      buttonClasses = cn(buttonClasses, "relative overflow-hidden");
     }
 
     return (
@@ -62,14 +57,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
         {isGoldenBlockWithBolts && (
           <>
-            {/* Top-left bolt */}
+            {/* Bolts */}
             <span className="absolute top-[4px] left-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
-            {/* Top-right bolt */}
             <span className="absolute top-[4px] right-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
-            {/* Bottom-left bolt */}
             <span className="absolute bottom-[4px] left-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
-            {/* Bottom-right bolt */}
             <span className="absolute bottom-[4px] right-[4px] w-[4px] h-[4px] bg-accent-foreground/60 rounded-full pointer-events-none z-10"></span>
+            {/* Shine Element */}
+            <span
+              className={cn(
+                "absolute top-1/2 left-1/2", // Center the origin
+                "w-8 h-[200%]", // Shine element dimensions
+                "bg-white/25", // Shine color and transparency
+                "pointer-events-none z-0", // Ensure it's behind bolts if they overlap, and non-interactive
+                "opacity-0 group-hover:opacity-100", // Control visibility on hover
+                "group-hover:animate-glint-sweep" // Apply animation on hover
+              )}
+            />
           </>
         )}
       </Comp>

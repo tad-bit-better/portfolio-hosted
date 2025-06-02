@@ -94,12 +94,17 @@ export default {
           '0%, 100%': { transform: 'translateY(0)' },
           '50%': { transform: 'translateY(-4px)' },
         },
+        'glint-sweep': {
+          '0%': { transform: 'translateX(-100%) translateY(-100%) rotate(30deg)' },
+          '100%': { transform: 'translateX(100%) translateY(100%) rotate(30deg)' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'bobbing': 'bobbing 1s ease-in-out infinite',
+        'glint-sweep': 'glint-sweep 0.6s ease-out',
       },
     },
   },
