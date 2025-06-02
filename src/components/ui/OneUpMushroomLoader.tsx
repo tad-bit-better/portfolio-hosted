@@ -1,4 +1,3 @@
-
 // src/components/ui/OneUpMushroomLoader.tsx
 import type { SVGProps } from 'react';
 import { cn } from '@/lib/utils';
@@ -14,8 +13,8 @@ export function OneUpMushroomLoader({ className, ...props }: SVGProps<SVGSVGElem
     >
       {/* Stem - Beige color */}
       <path d="M12 20 H20 V28 H12 Z" fill="#F5F5DC" />
-      {/* Cap - Green color */}
-      <path d="M8 20 Q16 10 24 20 Z" fill="#228B22" /> {/* ForestGreen */}
+      {/* Cap - Red color (Mario Power-Up Mushroom) */}
+      <path d="M8 20 Q16 10 24 20 Z" fill="#FF1A1A" /> {/* Vibrant Red, like HSL(0, 90%, 60%) */}
       {/* Spots - White */}
       <circle cx="16" cy="15" r="2.5" fill="#FFFFFF" />
       <circle cx="11.5" cy="18" r="1.8" fill="#FFFFFF" />
