@@ -172,7 +172,7 @@ export default function RequestAccessPage() {
           
           {guestId && initialLoadCheckDone && ( // Show this section if a guestId is active (from localStorage)
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
-              <p className="text-sm text-foreground">Your remembered Guest ID:</p>
+              <p className="text-base text-foreground">Your remembered Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
               <Button onClick={() => checkAccessStatus(guestId)} disabled={isLoading && !inputGuestId} className="w-full" variant="outline">
                 {isLoading && !inputGuestId ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}
@@ -195,7 +195,7 @@ export default function RequestAccessPage() {
                 placeholder="Enter Guest ID here"
                 value={inputGuestId}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setInputGuestId(e.target.value)}
-                className="pl-10 text-base" // Added padding for icon
+                className="pl-10"
                 disabled={isLoading}
               />
             </div>
@@ -222,7 +222,7 @@ export default function RequestAccessPage() {
                     placeholder="Enter your name"
                     value={requesterName}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
-                    className="pl-10 text-base" // Added padding for icon
+                    className="pl-10"
                     disabled={isLoading}
                 />
             </div>
@@ -238,7 +238,7 @@ export default function RequestAccessPage() {
           </Button>
         </CardFooter>
       </Card>
-      <p className="mt-8 text-xs text-muted-foreground text-center max-w-md">
+      <p className="mt-8 text-sm text-muted-foreground text-center max-w-md">
         Access is granted for 24 hours upon approval. If your access expires, you can request it again.
         The site owner will be notified of your request (via console log for this demo).
       </p>

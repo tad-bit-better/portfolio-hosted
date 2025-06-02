@@ -29,7 +29,7 @@ function Navbar() {
         </Link>
         <div className="hidden md:flex space-x-2">
           {navItems.map(item => (
-            <Button key={item.label} variant="ghost" asChild className="text-foreground hover:text-primary hover:bg-primary/10">
+            <Button key={item.label} variant="ghost" asChild className="text-foreground hover:text-primary hover:bg-primary/10 text-base">
               <Link href={item.href} className="flex items-center">
                 <item.Icon className="mr-2 h-4 w-4" /> {item.label}
               </Link>

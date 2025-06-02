@@ -60,11 +60,11 @@ export function ContactForm() {
             placeholder={contactFormFields.name.placeholder}
             aria-describedby="name-error"
             defaultValue={state.fieldValues?.name}
-            className="pl-10 py-3 text-base"
+            className="pl-10 py-3"
           />
         </div>
         {state.errors?.name && (
-          <p id="name-error" className="mt-2 text-sm text-destructive">
+          <p id="name-error" className="mt-2 text-base text-destructive">
             {state.errors.name[0]}
           </p>
         )}
@@ -83,11 +83,11 @@ export function ContactForm() {
             placeholder={contactFormFields.email.placeholder}
             aria-describedby="email-error"
             defaultValue={state.fieldValues?.email}
-            className="pl-10 py-3 text-base"
+            className="pl-10 py-3"
           />
         </div>
         {state.errors?.email && (
-          <p id="email-error" className="mt-2 text-sm text-destructive">
+          <p id="email-error" className="mt-2 text-base text-destructive">
             {state.errors.email[0]}
           </p>
         )}
@@ -106,11 +106,11 @@ export function ContactForm() {
             placeholder={contactFormFields.message.placeholder}
             aria-describedby="message-error"
             defaultValue={state.fieldValues?.message}
-            className="pl-10 py-3 text-base"
+            className="pl-10 py-3"
           />
         </div>
         {state.errors?.message && (
-          <p id="message-error" className="mt-2 text-sm text-destructive">
+          <p id="message-error" className="mt-2 text-base text-destructive">
             {state.errors.message[0]}
           </p>
         )}

@@ -18,8 +18,8 @@ export function SkillItem({ skill }: SkillItemProps) {
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between mb-1">
-          <span className="text-sm text-muted-foreground">Proficiency</span>
-          <span className="text-sm font-semibold text-primary">{level}%</span>
+          <span className="text-base text-muted-foreground">Proficiency</span>
+          <span className="text-base font-semibold text-primary">{level}%</span>
         </div>
         <Progress value={level} aria-label={`${name} proficiency: ${level}%`} className="h-3 [&>div]:bg-primary" />
       </CardContent>

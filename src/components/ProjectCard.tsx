@@ -48,11 +48,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
           />
         </div>
         <CardTitle className="text-2xl font-headline">{project.title}</CardTitle>
-        <CardDescription className="text-muted-foreground h-20 overflow-y-auto text-sm leading-relaxed">{project.description}</CardDescription>
+        <CardDescription className="text-muted-foreground h-20 overflow-y-auto leading-relaxed">{project.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="mb-4">
-          <h4 className="text-sm font-semibold mb-2 text-foreground flex items-center">
+          <h4 className="text-base font-semibold mb-2 text-foreground flex items-center">
             <Tags className="h-4 w-4 mr-2 text-primary" />
             Technologies Used:
           </h4>
