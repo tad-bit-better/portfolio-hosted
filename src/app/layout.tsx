@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'Pushpendra // Devcade - Level Up Your Projects!',
-  description: 'The retro-themed portfolio of Pushpendra Singh. Enter the Devcade and explore awesome projects!',
+  description: 'The retro-themed portfolio of Pushpendra Yadav. Enter the Devcade and explore awesome projects!',
 };
 
 export default function RootLayout({

@@ -43,7 +43,7 @@ export interface PortfolioConfig {
 
 export const portfolioConfig: PortfolioConfig = {
   personalInfo: {
-    name: "Pushpendra Singh",
+    name: "Pushpendra Yadav",
     title: "Pixel Paladin & Code Commander",
     bio: "Player 1 ready! I'm a dev hero, battling buggy code monsters and crafting epic web quests. My power-ups include AI, full-stack mastery, and an insatiable hunger for new tech scrolls!",
     profileImage: "https://placehold.co/300x300.png",
@@ -88,12 +88,12 @@ export const portfolioConfig: PortfolioConfig = {
     { name: "UI/UX Design Principles", level: 70, Icon: Eye },
   ],
   socialLinks: [
-    { platform: "GitHub", url: "https://github.com/pushpendra", Icon: Github },
-    { platform: "LinkedIn", url: "https://linkedin.com/in/pushpendra", Icon: Linkedin },
-    { platform: "Twitter", url: "https://twitter.com/pushpendra", Icon: Twitter },
+    { platform: "GitHub", url: "https://github.com/tad-bit-better", Icon: Github },
+    { platform: "LinkedIn", url: "https://www.linkedin.com/in/pushpendrayadav2011", Icon: Linkedin },
+
   ],
   contact: {
-    email: "contact@pushpendra.dev",
+    email: "pushpendra.y2011@gmail.com",
     introText: "Ready to team up or got a side quest? Drop a message in the comms channel!",
   },
 };
