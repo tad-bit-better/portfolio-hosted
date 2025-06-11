@@ -18,7 +18,7 @@ export function SkillItem({ skill }: SkillItemProps) {
       "bg-card/80 backdrop-blur-sm border-primary/20",
       "aspect-[3/2] flex flex-col justify-center items-center p-4",
       "text-foreground",
-      "hover:bg-accent hover:text-accent-foreground",
+      "hover:bg-accent hover:text-accent-foreground", // Default hover text color is accent-foreground
       "transition-colors duration-300 ease-in-out"
     )}>
       {/* Large Background Icon */}
@@ -57,9 +57,9 @@ export function SkillItem({ skill }: SkillItemProps) {
           key={idx}
           className={cn(
             "absolute pointer-events-none z-10",
-            "text-accent",
+            "text-accent", // Base color of stars
             "transition-all duration-300 ease-in-out",
-            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125",
+            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125", // Star color changes on hover
             star.className
           )}
           fill={star.fill ? "currentColor" : "none"}
@@ -70,7 +70,7 @@ export function SkillItem({ skill }: SkillItemProps) {
       <div className="relative z-20 text-center">
         <p className={cn(
           "text-base sm:text-lg font-headline",
-          "group-hover:[-webkit-text-stroke:2px_white] group-hover:[text-stroke:2px_white]"
+          "group-hover:text-primary" // Change text to primary red on hover
         )}>{name}</p>
       </div>
     </Card>
