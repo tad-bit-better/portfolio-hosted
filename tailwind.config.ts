@@ -106,7 +106,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'bobbing': 'bobbing 1s ease-in-out infinite',
-        'glint-sweep': 'glint-sweep 0.6s ease-out',
+        'glint-sweep': 'glint-sweep 0.6s ease-out forwards', // Added 'forwards' here
       },
     },
   },
