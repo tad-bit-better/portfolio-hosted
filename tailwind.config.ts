@@ -96,9 +96,13 @@ export default {
         },
         'glint-sweep': {
           '0%': { transform: 'translateX(-150%) translateY(-50%) rotate(25deg)', opacity: '0' },
-          '20%': { opacity: '1' },
-          '80%': { opacity: '1' },
+          '20%': { opacity: '0.7' }, // Make visible during sweep
+          '80%': { opacity: '0.7' }, // Keep visible
           '100%': { transform: 'translateX(150%) translateY(-50%) rotate(25deg)', opacity: '0' },
+        },
+        'star-glitter': {
+          '0%, 100%': { opacity: '0.4' },
+          '50%': { opacity: '0.9' },
         }
       },
       animation: {
@@ -106,7 +110,8 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out forwards',
         'bobbing': 'bobbing 1s ease-in-out infinite',
-        'glint-sweep': 'glint-sweep 0.6s ease-out forwards', // Added 'forwards' here
+        'glint-sweep': 'glint-sweep 0.6s ease-out forwards',
+        'star-glitter': 'star-glitter 2s infinite ease-in-out',
       },
     },
   },
