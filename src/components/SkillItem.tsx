@@ -35,17 +35,17 @@ export function SkillItem({ skill }: SkillItemProps) {
       {Icon && (
         <Icon className={cn(
           "absolute inset-0 m-auto h-3/4 w-3/4 text-primary pointer-events-none z-0",
-          "opacity-[0.10]",
+          "opacity-[0.07]", // Reduced opacity
           "transition-all duration-300 ease-in-out",
-          "group-hover:opacity-[0.20] group-hover:scale-105" // Increased opacity and scale on hover
+          "group-hover:opacity-[0.15] group-hover:scale-105" // Increased opacity and scale on hover
         )} />
       )}
 
       <span
         className={cn(
           "absolute top-1/2 left-1/2",
-          "w-16 h-[250%]",
-          "bg-white/20", // Shine color
+          "w-16 h-[250%]", // Adjusted width for potentially wider cards
+          "bg-white/25", // Shine color
           "pointer-events-none z-[5]",
           "opacity-0", // Base opacity
           "group-hover:animate-glint-sweep" // Apply animation on hover
@@ -71,8 +71,9 @@ export function SkillItem({ skill }: SkillItemProps) {
       <div className="relative z-20 text-center">
         <p className={cn(
           "text-base sm:text-lg font-headline",
-          "transition-colors duration-300 ease-in-out", // Smooth color transition for text
-          "group-hover:text-primary" // Text color changes to primary red on hover
+          "transition-colors duration-300 ease-in-out",
+          "group-hover:text-primary",
+          "[text-shadow:0px_1px_2px_hsl(var(--foreground)/0.3)]" // Added subtle text shadow
         )}>{name}</p>
       </div>
     </Card>
