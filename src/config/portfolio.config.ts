@@ -90,7 +90,7 @@ export const portfolioConfig: PortfolioConfig = {
       role: "Business Technology Analysts",
       dates: "April 2016 - March 2019",
       description: "Provided technology consulting services to various clients, assisting in digital transformation projects and system integrations. Specialized in enterprise application development and IT strategy.",
-      logoUrl: "https://placehold.co/100x100.png",
+      logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Deloitte_Logo.png/330px-Deloitte_Logo.png",
       logoHint: "company logo",
       companyUrl: "https://www2.deloitte.com/us/en/services/consulting.html",
       technologies: ["Java", "JSP", "Servlets", "Salesforce (Lightning)", "React"],
