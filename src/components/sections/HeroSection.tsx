@@ -35,7 +35,7 @@ export function HeroSection({ personalInfo }: HeroSectionProps) {
         </p>
         <div className="space-x-4">
           <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg transform transition-transform duration-300 hover:scale-105">
-            <Link href="#projects">View My Levels <ArrowDown className="ml-2 h-5 w-5" /></Link>
+            <Link href="#experience">View My Levels <ArrowDown className="ml-2 h-5 w-5" /></Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="shadow-lg transform transition-transform duration-300 hover:scale-105">
             <Link href="#contact">Open Comms</Link>
