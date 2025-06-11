@@ -23,7 +23,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
               alt={`${experience.companyName} logo`}
               fill
               sizes="64px"
-              className="object-contain"
+              className="object-contain mix-blend-multiply"
               data-ai-hint={experience.logoHint || 'company logo'}
             />
           </div>
