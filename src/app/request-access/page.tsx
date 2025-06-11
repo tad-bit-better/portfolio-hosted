@@ -46,7 +46,7 @@ export default function RequestAccessPage() {
         if (data.access) {
           localStorage.setItem('guestId', idToVerify);
           setGuestId(idToVerify);
-          setInputGuestId(''); 
+          setInputGuestId('');
           setStatusMessage("ACCESS GRANTED! Welcome to the game world!");
           router.push('/');
         } else {
@@ -60,7 +60,7 @@ export default function RequestAccessPage() {
         }
       } else {
         setError(data.error || `SYSTEM ERROR checking ID: ${idToVerify}. Try again?`);
-        if (idToVerify === guestId) { 
+        if (idToVerify === guestId) {
             localStorage.removeItem('guestId');
             setGuestId(null);
         }
@@ -70,7 +70,7 @@ export default function RequestAccessPage() {
     } finally {
       setIsLoading(false);
       setIsPageLoading(false);
-      if (!isManualCheck) { 
+      if (!isManualCheck) {
         setInitialLoadCheckDone(true);
       }
     }
@@ -83,10 +83,10 @@ export default function RequestAccessPage() {
       checkAccessStatus(storedGuestId);
     } else {
       setIsPageLoading(false);
-      setInitialLoadCheckDone(true); 
+      setInitialLoadCheckDone(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); 
+  }, []);
 
   const handleRequestAccess = async () => {
     if (!requesterName.trim() || requesterName.trim().length < 2) {
@@ -106,8 +106,8 @@ export default function RequestAccessPage() {
       if (response.ok && data.guestId) {
         localStorage.setItem('guestId', data.guestId);
         setGuestId(data.guestId);
-        setInputGuestId(''); 
-        setRequesterName(''); 
+        setInputGuestId('');
+        setRequesterName('');
         setStatusMessage(data.message || 'Request sent! Our admin will review your application for the VIP Pass.');
       } else {
         setError(data.error || 'Oops! Request failed. Server gremlins strike again.');
@@ -146,7 +146,7 @@ export default function RequestAccessPage() {
 
   if (isPageLoading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4 mx-auto">
         <OneUpMushroomLoader className="h-16 w-16 mb-4" />
         <p className="text-lg text-foreground">Checking your saved Guest ID...</p>
       </div>
@@ -154,11 +154,11 @@ export default function RequestAccessPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-background to-card p-4 mx-auto">
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <KeyRound className="mx-auto h-12 w-12 text-primary mb-4" />
-          <CardTitle className="text-3xl font-bold">Secret Dev Zone</CardTitle>
+          <CardTitle className="text-2xl md:text-3xl font-bold">Secret Dev Zone</CardTitle>
           <CardDescription className="text-muted-foreground">
             This area is for VIPs only! Got a Guest ID or need to request one?
           </CardDescription>
@@ -178,8 +178,8 @@ export default function RequestAccessPage() {
               <AlertDescription>{statusMessage}</AlertDescription>
             </Alert>
           )}
-          
-          {guestId && initialLoadCheckDone && ( 
+
+          {guestId && initialLoadCheckDone && (
             <div className="p-3 bg-muted/50 rounded-md space-y-2">
               <p className="text-base text-foreground">Your current Guest ID:</p>
               <p className="text-lg font-mono font-semibold text-primary break-all">{guestId}</p>
@@ -193,7 +193,7 @@ export default function RequestAccessPage() {
           <Separator className="my-6" />
 
           <p className="text-sm text-muted-foreground text-center -mb-2">Need a new one? Request below!</p>
-          
+
           <div className="space-y-2 pt-2">
             <Label htmlFor="requesterName" className="block text-sm font-medium text-foreground">
               Who is requesting the access?
@@ -210,9 +210,9 @@ export default function RequestAccessPage() {
                     disabled={isLoading}
                 />
             </div>
-            <Button 
-              onClick={handleRequestAccess} 
-              disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2} 
+            <Button
+              onClick={handleRequestAccess}
+              disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2}
               className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
             >
               {isLoading && !inputGuestId && !guestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <PlusCircle className="mr-2 h-4 w-4" />}
@@ -222,7 +222,7 @@ export default function RequestAccessPage() {
         </CardContent>
         <CardFooter className="flex-col space-y-4 pt-5">
           <Separator />
-          
+
           <div className="w-full space-y-2 pt-2">
             <Label htmlFor="manualGuestId" className="block text-sm font-medium text-foreground">
               {guestId ? "Got a different Guest ID?" : "Already have a Guest ID?"}
@@ -253,3 +253,5 @@ export default function RequestAccessPage() {
     </div>
   );
 }
+
+    
