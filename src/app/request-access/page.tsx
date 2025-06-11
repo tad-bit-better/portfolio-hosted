@@ -191,7 +191,7 @@ export default function RequestAccessPage() {
           )}
 
           <Separator className="my-6" />
-
+          
           <p className="text-sm text-muted-foreground text-center -mb-2">Need a new one? Request below!</p>
 
           <div className="space-y-2 pt-2">
@@ -248,10 +248,8 @@ export default function RequestAccessPage() {
       </Card>
       <p className="mt-8 text-sm text-muted-foreground text-center max-w-md">
         Guest IDs grant access for 24 hours once approved by the Game Master. Expired? Request a new one!
-        The Game Master gets a ping for new requests (via console logs for this demo).
+        The Game Master gets a ping for new requests.
       </p>
     </div>
   );
 }
-
-    
