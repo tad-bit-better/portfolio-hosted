@@ -13,21 +13,21 @@ export function SkillItem({ skill }: SkillItemProps) {
   return (
     <Card className={cn(
       "group",
-      "shadow-md hover:shadow-lg transition-all duration-300 ease-in-out", // Kept existing transitions
+      "shadow-md hover:shadow-lg transition-all duration-300 ease-in-out",
       "animate-fade-in relative overflow-hidden",
       "bg-card/80 backdrop-blur-sm border-primary/20",
       "aspect-[3/2] flex flex-col justify-center items-center p-4",
-      "text-foreground", // Default text color
-      "hover:bg-accent hover:text-accent-foreground", // Change background and text on hover
-      "transition-colors duration-300 ease-in-out" // Added for bg/text color transition
+      "text-foreground",
+      "hover:bg-accent hover:text-accent-foreground",
+      "transition-colors duration-300 ease-in-out"
     )}>
       {/* Large Background Icon */}
       {Icon && (
         <Icon className={cn(
           "absolute inset-0 m-auto h-3/4 w-3/4 text-primary pointer-events-none z-0",
-          "opacity-[0.10]", // Slightly more visible by default
+          "opacity-[0.10]",
           "transition-all duration-300 ease-in-out",
-          "group-hover:opacity-[0.20] group-hover:scale-105" // Pop effect
+          "group-hover:opacity-[0.20] group-hover:scale-105"
         )} />
       )}
 
@@ -39,9 +39,9 @@ export function SkillItem({ skill }: SkillItemProps) {
           "bg-white/20",
           "pointer-events-none z-[5]",
           "opacity-0",
-          "group-hover:animate-glint-sweep" // Uses animation defined in tailwind.config.ts
+          "group-hover:animate-glint-sweep"
         )}
-        style={{ animationDuration: '0.75s' }} // Custom duration for card shine
+        style={{ animationDuration: '0.75s' }}
       />
 
       {/* Decorative Stars - z-10 to be above background icon but below text */}
@@ -57,9 +57,9 @@ export function SkillItem({ skill }: SkillItemProps) {
           key={idx}
           className={cn(
             "absolute pointer-events-none z-10",
-            "text-accent", // Default star color
+            "text-accent",
             "transition-all duration-300 ease-in-out",
-            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125", // Pop effect and color change
+            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125",
             star.className
           )}
           fill={star.fill ? "currentColor" : "none"}
@@ -68,7 +68,10 @@ export function SkillItem({ skill }: SkillItemProps) {
 
       {/* Skill Name - z-20 to be on top */}
       <div className="relative z-20 text-center">
-        <p className="text-base sm:text-lg font-headline">{name}</p> {/* Text color will be inherited from card */}
+        <p className={cn(
+          "text-base sm:text-lg font-headline",
+          "group-hover:[-webkit-text-stroke:1px_white] group-hover:[text-stroke:1px_white]"
+        )}>{name}</p>
       </div>
     </Card>
   );
