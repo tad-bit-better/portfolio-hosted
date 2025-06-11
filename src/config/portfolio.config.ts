@@ -1,15 +1,17 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Map } from 'lucide-react';
+import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Briefcase } from 'lucide-react';
 
-export interface Project {
+export interface Experience {
   id: string;
-  title: string;
+  companyName: string;
+  role: string;
+  dates: string;
   description: string;
-  imageUrl: string;
-  imageHint?: string;
-  url: string;
-  tags: string[];
+  logoUrl: string;
+  logoHint?: string;
+  companyUrl: string;
+  technologies: string[];
 }
 
 export interface Skill {
@@ -32,7 +34,7 @@ export interface PortfolioConfig {
     profileImage: string;
     profileImageHint?: string;
   };
-  projects: Project[];
+  experience: Experience[];
   skills: Skill[];
   socialLinks: SocialLink[];
   contact: {
@@ -49,33 +51,61 @@ export const portfolioConfig: PortfolioConfig = {
     profileImage: "https://placehold.co/300x300.png",
     profileImageHint: "profile portrait",
   },
-  projects: [
+  experience: [
     {
-      id: "project-1",
-      title: "AI E-Com: The Loot Store",
-      description: "Leveled up an e-commerce world with AI smarts! Personalized loot drops (recommendations) using ancient algorithms and NLP magic for treasure (product) hunts.",
-      imageUrl: "https://placehold.co/600x400.png",
-      imageHint: "e-commerce interface",
-      url: "https://pushpendra.dev/projects/ai-ecommerce",
-      tags: ["React", "Node.js", "Python", "ML", "AWS"],
+      id: "exp-leena-ai",
+      companyName: "Leena AI",
+      role: "Senior Software Engineer",
+      dates: "May 2022 - Currently",
+      description: "Contributed to the development of AI-powered HR solutions, focusing on enhancing employee experience and automating HR processes. Leveraged modern tech stacks to build scalable and robust applications.",
+      logoUrl: "https://placehold.co/100x100.png",
+      logoHint: "company logo",
+      companyUrl: "#", // Replace with actual URL
+      technologies: ["Node.js", "React", "TypeScript", "AWS", "Microservices"],
     },
     {
-      id: "project-2",
-      title: "Sensor Scan: Live Data HUD",
-      description: "Built a high-score dashboard for IoT sensor data! Features real-time stat tracking and interactive charts. Maximize your KDR (Knowledge Data Ratio)!",
-      imageUrl: "https://placehold.co/600x400.png",
-      imageHint: "dashboard charts",
-      url: "https://pushpendra.dev/projects/data-dashboard",
-      tags: ["Vue.js", "Firebase", "D3.js", "WebSocket"],
+      id: "exp-fnp",
+      companyName: "Ferns and Petals",
+      role: "Software Engineer",
+      dates: "June 2021 - April 2022",
+      description: "Developed and maintained e-commerce platforms, improving performance and user experience. Worked on various modules from product discovery to checkout optimization.",
+      logoUrl: "https://placehold.co/100x100.png",
+      logoHint: "company logo",
+      companyUrl: "#", // Replace with actual URL
+      technologies: ["PHP", "Magento", "JavaScript", "MySQL", "Vue.js"],
     },
     {
-      id: "project-3",
-      title: "Open World Mod: DevTools Saga",
-      description: "Joined a guild of open-source heroes to upgrade a legendary DevTools artifact. Enhanced debugging powers for frontend adventurers!",
-      imageUrl: "https://placehold.co/600x400.png",
-      imageHint: "code editor",
-      url: "https://github.com/pushpendra",
-      tags: ["JavaScript", "Browser Mods", "Open Source", "UI/UX"],
+      id: "exp-datafoundry",
+      companyName: "Datafoundry AI",
+      role: "Software Engineer",
+      dates: "April 2020 - June 2021",
+      description: "Focused on building data-intensive applications and AI solutions. Involved in the full software development lifecycle, from conceptualization to deployment of machine learning models.",
+      logoUrl: "https://placehold.co/100x100.png",
+      logoHint: "company logo",
+      companyUrl: "#", // Replace with actual URL
+      technologies: ["Python", "Flask", "Docker", "Kubernetes", "Google Cloud"],
+    },
+    {
+      id: "exp-deloitte",
+      companyName: "Deloitte",
+      role: "Consultant",
+      dates: "April 2016 - March 2019",
+      description: "Provided technology consulting services to various clients, assisting in digital transformation projects and system integrations. Specialized in enterprise application development and IT strategy.",
+      logoUrl: "https://placehold.co/100x100.png",
+      logoHint: "company logo",
+      companyUrl: "#", // Replace with actual URL
+      technologies: ["Java", "Spring Boot", "Oracle DB", "Agile", "SAP"],
+    },
+    {
+      id: "exp-ncs",
+      companyName: "NCS Pvt Ltd",
+      role: "Software Developer",
+      dates: "July 2014 - April 2016",
+      description: "Began my tech journey developing and maintaining software applications. Gained foundational experience in coding, debugging, and software development best practices.",
+      logoUrl: "https://placehold.co/100x100.png",
+      logoHint: "company logo",
+      companyUrl: "#", // Replace with actual URL
+      technologies: [".NET", "C#", "SQL Server", "HTML", "CSS"],
     },
   ],
   skills: [
