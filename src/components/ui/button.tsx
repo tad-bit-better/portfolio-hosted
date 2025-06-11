@@ -85,7 +85,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                 "w-8 h-[200%]",             // Shine element dimensions (width 32px, height 200% of button)
                 "bg-white/25",              // Shine color and transparency
                 "pointer-events-none z-0",  // Ensure it's behind bolts and non-interactive
-                "opacity-0 group-hover:opacity-100", // Control visibility on hover (relies on 'group' on parent button)
+                "opacity-0", // Base opacity, animation will control visibility
                 "group-hover:animate-glint-sweep"    // Apply animation on hover
               )}
             />

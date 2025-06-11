@@ -95,8 +95,10 @@ export default {
           '50%': { transform: 'translateY(-4px)' },
         },
         'glint-sweep': {
-          '0%': { transform: 'translateX(-100%) translateY(-100%) rotate(30deg)' },
-          '100%': { transform: 'translateX(100%) translateY(100%) rotate(30deg)' },
+          '0%': { transform: 'translateX(-150%) translateY(-50%) rotate(25deg)', opacity: '0' },
+          '20%': { opacity: '1' },
+          '80%': { opacity: '1' },
+          '100%': { transform: 'translateX(150%) translateY(-50%) rotate(25deg)', opacity: '0' },
         }
       },
       animation: {

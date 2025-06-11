@@ -31,7 +31,7 @@ export function SkillItem({ skill }: SkillItemProps) {
           "w-16 h-[250%]", // Adjusted for card aspect ratio
           "bg-white/20",
           "pointer-events-none z-[5]", // Above background icon (z-0), below stars (z-10)
-          "opacity-0 group-hover:opacity-100",
+          "opacity-0", // Base opacity, animation will control visibility
           "group-hover:animate-glint-sweep"
         )}
         style={{ animationDuration: '0.75s' }}
