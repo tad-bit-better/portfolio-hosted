@@ -24,10 +24,10 @@ export function HeroSection({ personalInfo }: HeroSectionProps) {
             data-ai-hint={personalInfo.profileImageHint}
           />
         </div>
-        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-primary flex items-center justify-center">
-           <Gamepad2 className="mr-3 h-10 w-10" /> {personalInfo.name}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-primary flex items-center justify-center">
+           <Gamepad2 className="mr-3 h-8 sm:h-10 w-8 sm:w-10" /> {personalInfo.name}
         </h1>
-        <h2 className="text-2xl md:text-3xl font-headline text-foreground mb-6">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-headline text-foreground mb-6">
           {personalInfo.title}
         </h2>
         <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
