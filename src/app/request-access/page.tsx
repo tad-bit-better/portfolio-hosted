@@ -191,8 +191,39 @@ export default function RequestAccessPage() {
           )}
 
           <Separator className="my-6" />
+
+          <p className="text-sm text-muted-foreground text-center -mb-2">Need a new one? Request below!</p>
           
-          <div className="space-y-2">
+          <div className="space-y-2 pt-2">
+            <Label htmlFor="requesterName" className="block text-sm font-medium text-foreground">
+              Who is requesting the access?
+            </Label>
+            <div className="relative">
+                <UserIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Input
+                    type="text"
+                    id="requesterName"
+                    placeholder="E.g., HRNinja"
+                    value={requesterName}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
+                    className="pl-10"
+                    disabled={isLoading}
+                />
+            </div>
+            <Button 
+              onClick={handleRequestAccess} 
+              disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2} 
+              className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+            >
+              {isLoading && !inputGuestId && !guestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <PlusCircle className="mr-2 h-4 w-4" />}
+              Request
+            </Button>
+          </div>
+        </CardContent>
+        <CardFooter className="flex-col space-y-4 pt-5">
+          <Separator />
+          
+          <div className="w-full space-y-2 pt-2">
             <Label htmlFor="manualGuestId" className="block text-sm font-medium text-foreground">
               {guestId ? "Got a different Guest ID?" : "Already have a Guest ID?"}
             </Label>
@@ -213,38 +244,6 @@ export default function RequestAccessPage() {
               Check This ID
             </Button>
           </div>
-
-        </CardContent>
-        <CardFooter className="flex-col space-y-4 pt-5">
-          <Separator />
-           <p className="text-sm text-muted-foreground pt-2">Need a new one? Request below!</p>
-          
-          <div className="w-full space-y-2">
-            <Label htmlFor="requesterName" className="block text-sm font-medium text-foreground">
-              Your Player Name
-            </Label>
-            <div className="relative">
-                <UserIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                    type="text"
-                    id="requesterName"
-                    placeholder="E.g., MarioTheDev"
-                    value={requesterName}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setRequesterName(e.target.value)}
-                    className="pl-10"
-                    disabled={isLoading}
-                />
-            </div>
-          </div>
-
-          <Button 
-            onClick={handleRequestAccess} 
-            disabled={isLoading || !requesterName.trim() || requesterName.trim().length < 2} 
-            className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
-          >
-            {isLoading && !inputGuestId && !guestId ? <OneUpMushroomLoader className="mr-2 h-4 w-4" /> : <PlusCircle className="mr-2 h-4 w-4" />}
-            Request New Guest ID
-          </Button>
         </CardFooter>
       </Card>
       <p className="mt-8 text-sm text-muted-foreground text-center max-w-md">
