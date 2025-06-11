@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   :root {
     --background: 200 80% 90%; /* Light Sky Blue */
     --foreground: 20 50% 10%; /* Very Dark Brown/Almost Black */
