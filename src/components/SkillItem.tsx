@@ -70,7 +70,7 @@ export function SkillItem({ skill }: SkillItemProps) {
       <div className="relative z-20 text-center">
         <p className={cn(
           "text-base sm:text-lg font-headline",
-          "group-hover:[-webkit-text-stroke:1px_white] group-hover:[text-stroke:1px_white]"
+          "group-hover:[-webkit-text-stroke:2px_white] group-hover:[text-stroke:2px_white]"
         )}>{name}</p>
       </div>
     </Card>
