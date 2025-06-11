@@ -55,7 +55,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-leena-ai",
       companyName: "Leena AI",
-      role: "Senior Software Engineer",
+      role: "Lead Developer",
       dates: "May 2022 - Currently",
       description: "Contributed to the development of AI-powered HR solutions, focusing on enhancing employee experience and automating HR processes. Leveraged modern tech stacks to build scalable and robust applications.",
       logoUrl: "https://placehold.co/100x100.png",
@@ -66,7 +66,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-fnp",
       companyName: "Ferns and Petals",
-      role: "Software Engineer",
+      role: "Tech Lead",
       dates: "June 2021 - April 2022",
       description: "Developed and maintained e-commerce platforms, improving performance and user experience. Worked on various modules from product discovery to checkout optimization.",
       logoUrl: "https://placehold.co/100x100.png",
@@ -77,7 +77,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-datafoundry",
       companyName: "Datafoundry AI",
-      role: "Software Engineer",
+      role: "Tech Lead",
       dates: "April 2020 - June 2021",
       description: "Focused on building data-intensive applications and AI solutions. Involved in the full software development lifecycle, from conceptualization to deployment of machine learning models.",
       logoUrl: "https://placehold.co/100x100.png",
@@ -88,7 +88,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-deloitte",
       companyName: "Deloitte",
-      role: "Consultant",
+      role: "Business Technology Analysts",
       dates: "April 2016 - March 2019",
       description: "Provided technology consulting services to various clients, assisting in digital transformation projects and system integrations. Specialized in enterprise application development and IT strategy.",
       logoUrl: "https://placehold.co/100x100.png",
@@ -99,7 +99,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-ncs",
       companyName: "NCS Pvt Ltd",
-      role: "Software Developer",
+      role: "Staff Developer",
       dates: "July 2014 - April 2016",
       description: "Began my tech journey developing and maintaining software applications. Gained foundational experience in coding, debugging, and software development best practices.",
       logoUrl: "https://placehold.co/100x100.png",
