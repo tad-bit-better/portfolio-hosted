@@ -57,11 +57,11 @@ export const portfolioConfig: PortfolioConfig = {
       companyName: "Leena AI",
       role: "Lead Developer",
       dates: "May 2022 - Currently",
-      description: "Contributed to the development of AI-powered HR solutions, focusing on enhancing employee experience and automating HR processes. Leveraged modern tech stacks to build scalable and robust applications.",
+      description: "Contributed to the development of AI-powered HR solutions, focusing on enhancing employee experience and automating workflows processes. Leveraged modern tech stacks to build scalable and robust config driven applications.",
       logoUrl: "https://placehold.co/100x100.png",
       logoHint: "company logo",
-      companyUrl: "#", // Replace with actual URL
-      technologies: ["Node.js", "React", "TypeScript", "AWS", "Microservices"],
+      companyUrl: "https://leena.ai/",
+      technologies: ["Javascript ES6", "React", "Storybook", "Webpack", "Vite", "Rollup"],
     },
     {
       id: "exp-fnp",
@@ -71,19 +71,19 @@ export const portfolioConfig: PortfolioConfig = {
       description: "Developed and maintained e-commerce platforms, improving performance and user experience. Worked on various modules from product discovery to checkout optimization.",
       logoUrl: "https://placehold.co/100x100.png",
       logoHint: "company logo",
-      companyUrl: "#", // Replace with actual URL
-      technologies: ["PHP", "Magento", "JavaScript", "MySQL", "Vue.js"],
+      companyUrl: "https://fnp.com",
+      technologies: ["Javascript ES6", "React", "NextJS", "React-admin", "Lighthouse", "Webworkers", "Sockets"],
     },
     {
       id: "exp-datafoundry",
       companyName: "Datafoundry AI",
       role: "Tech Lead",
       dates: "April 2020 - June 2021",
-      description: "Focused on building data-intensive applications and AI solutions. Involved in the full software development lifecycle, from conceptualization to deployment of machine learning models.",
+      description: "Focused on building data-intensive applications and AI solutions. Involved in the full software development lifecycle, from conceptualization to deployment of front end apps. Developed a fully functional component library and implementatio of microfrontend.",
       logoUrl: "https://placehold.co/100x100.png",
       logoHint: "company logo",
-      companyUrl: "#", // Replace with actual URL
-      technologies: ["Python", "Flask", "Docker", "Kubernetes", "Google Cloud"],
+      companyUrl: "https://datafoundry.ai/",
+      technologies: ["React", "Microfrontend", "Storybook"],
     },
     {
       id: "exp-deloitte",
@@ -93,8 +93,8 @@ export const portfolioConfig: PortfolioConfig = {
       description: "Provided technology consulting services to various clients, assisting in digital transformation projects and system integrations. Specialized in enterprise application development and IT strategy.",
       logoUrl: "https://placehold.co/100x100.png",
       logoHint: "company logo",
-      companyUrl: "#", // Replace with actual URL
-      technologies: ["Java", "Spring Boot", "Oracle DB", "Agile", "SAP"],
+      companyUrl: "https://www2.deloitte.com/us/en/services/consulting.html",
+      technologies: ["Java", "JSP", "Servlets", "Salesforce (Lightning)", "React"],
     },
     {
       id: "exp-ncs",
@@ -104,8 +104,8 @@ export const portfolioConfig: PortfolioConfig = {
       description: "Began my tech journey developing and maintaining software applications. Gained foundational experience in coding, debugging, and software development best practices.",
       logoUrl: "https://placehold.co/100x100.png",
       logoHint: "company logo",
-      companyUrl: "#", // Replace with actual URL
-      technologies: [".NET", "C#", "SQL Server", "HTML", "CSS"],
+      companyUrl: "https://nenosystems.com/",
+      technologies: ["Java", "Hibernate", "JSP", "Servlet", "Struts"],
     },
   ],
   skills: [
