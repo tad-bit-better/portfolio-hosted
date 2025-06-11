@@ -3,6 +3,7 @@
 'use server';
 
 import { z } from 'zod';
+import nodemailer from 'nodemailer';
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters, brave adventurer!"),
@@ -48,28 +49,58 @@ export async function submitContactForm(
     };
   }
 
-  // In a real app, you would integrate with an email service or database here.
-  console.log("Contact Form Submission Attempt (Retro Edition):");
-  console.log("Player Name:", validatedFields.data.name);
-  console.log("Comms Link:", validatedFields.data.email);
-  console.log("Quest Log:", validatedFields.data.message);
+  // Email sending logic
+  const senderEmail = process.env.CONTACT_FORM_SENDER_EMAIL;
+  const senderAppPassword = process.env.CONTACT_FORM_SENDER_APP_PASSWORD;
+  const recipientEmail = process.env.CONTACT_FORM_RECIPIENT_EMAIL;
 
-  // Simulate an API call
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  if (!senderEmail || !senderAppPassword || !recipientEmail) {
+    console.error("Email sending configuration is missing. Please set CONTACT_FORM_SENDER_EMAIL, CONTACT_FORM_SENDER_APP_PASSWORD, and CONTACT_FORM_RECIPIENT_EMAIL environment variables.");
+    return {
+      message: "SERVER ERROR: Comms relay is misconfigured. Message logged, but email not sent. Please try again later.",
+      success: false,
+      errors: null,
+      fieldValues: { name, email, message },
+    };
+  }
 
-  // Simulate success
-  const submissionSuccessful = true; 
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: senderEmail,
+      pass: senderAppPassword,
+    },
+  });
 
-  if (submissionSuccessful) {
+  const mailOptions = {
+    from: `"${validatedFields.data.name} (Portfolio Contact)" <${senderEmail}>`,
+    to: recipientEmail,
+    replyTo: validatedFields.data.email,
+    subject: `New Portfolio Contact from ${validatedFields.data.name}`,
+    html: `
+      <p>You have a new contact form submission:</p>
+      <ul>
+        <li><strong>Name:</strong> ${validatedFields.data.name}</li>
+        <li><strong>Email:</strong> ${validatedFields.data.email}</li>
+      </ul>
+      <p><strong>Message:</strong></p>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">${validatedFields.data.message}</pre>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("Contact form email sent successfully to:", recipientEmail);
     return {
       message: "MESSAGE SENT! Your transmission was successful. I'll warp a reply soon!",
       success: true,
       errors: null,
       fieldValues: { name: "", email: "", message: "" }, // Clear fields on success
     };
-  } else {
+  } catch (error) {
+    console.error("Error sending contact form email:", error);
     return {
-      message: "TRANSMISSION FAILED! Comms are down. Please try again later, brave one.",
+      message: "TRANSMISSION FAILED! Comms are down, email could not be sent. Please try again later, brave one.",
       success: false,
       errors: null,
       fieldValues: { name, email, message },
