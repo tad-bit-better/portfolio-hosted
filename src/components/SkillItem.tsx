@@ -11,14 +11,14 @@ interface SkillItemProps {
 export function SkillItem({ skill }: SkillItemProps) {
   const { name, Icon } = skill;
 
-  // Define stars with animation delays
+  // Define stars with animation delays and varied durations
   const stars = [
-    { className: "top-2 left-3 h-5 w-5 -rotate-12", fill: true, animationDelay: '0s' },
-    { className: "top-5 right-5 h-8 w-8 rotate-6", fill: true, animationDelay: '0.3s' },
-    { className: "bottom-3 left-6 h-6 w-6 rotate-12", fill: true, animationDelay: '0.6s' },
-    { className: "bottom-5 right-2 h-4 w-4 rotate-[25deg]", fill: true, animationDelay: '0.9s' },
-    { className: "top-1/2 left-1/4 h-5 w-5 -rotate-[30deg]", fill: true, animationDelay: '1.2s' },
-    { className: "bottom-1/4 right-1/3 h-7 w-7 rotate-[5deg]", fill: true, animationDelay: '1.5s' },
+    { className: "top-2 left-3 h-5 w-5 -rotate-12", fill: true, animationDelay: '0s', animationDuration: '2500ms' },
+    { className: "top-5 right-5 h-8 w-8 rotate-6", fill: true, animationDelay: '0.3s', animationDuration: '1800ms' },
+    { className: "bottom-3 left-6 h-6 w-6 rotate-12", fill: true, animationDelay: '0.6s', animationDuration: '2900ms' },
+    { className: "bottom-5 right-2 h-4 w-4 rotate-[25deg]", fill: true, animationDelay: '0.9s', animationDuration: '2200ms' },
+    { className: "top-1/2 left-1/4 h-5 w-5 -rotate-[30deg]", fill: true, animationDelay: '1.2s', animationDuration: '1600ms' },
+    { className: "bottom-1/4 right-1/3 h-7 w-7 rotate-[5deg]", fill: true, animationDelay: '1.5s', animationDuration: '2700ms' },
   ];
 
   return (
@@ -29,26 +29,26 @@ export function SkillItem({ skill }: SkillItemProps) {
       "bg-card/80 backdrop-blur-sm border-primary/20",
       "aspect-[3/2] flex flex-col justify-center items-center p-4",
       "text-foreground",
-      "hover:bg-accent hover:text-accent-foreground",
+      "hover:bg-accent hover:text-accent-foreground", // Updated hover background and text
       "transition-colors duration-300 ease-in-out"
     )}>
       {Icon && (
         <Icon className={cn(
           "absolute inset-0 m-auto h-3/4 w-3/4 text-primary pointer-events-none z-0",
-          "opacity-[0.07]", // Reduced opacity
+          "opacity-[0.07]",
           "transition-all duration-300 ease-in-out",
-          "group-hover:opacity-[0.15] group-hover:scale-105" // Increased opacity and scale on hover
+          "group-hover:opacity-[0.15] group-hover:scale-105" // Icon pops on hover
         )} />
       )}
 
       <span
         className={cn(
           "absolute top-1/2 left-1/2",
-          "w-16 h-[250%]", // Adjusted width for potentially wider cards
-          "bg-white/25", // Shine color
+          "w-16 h-[250%]",
+          "bg-white/25",
           "pointer-events-none z-[5]",
-          "opacity-0", // Base opacity
-          "group-hover:animate-glint-sweep" // Apply animation on hover
+          "opacity-0",
+          "group-hover:animate-glint-sweep"
         )}
         style={{ animationDuration: '0.75s' }}
       />
@@ -60,11 +60,11 @@ export function SkillItem({ skill }: SkillItemProps) {
             "absolute pointer-events-none z-10",
             "text-accent animate-star-glitter", // Base color and glitter animation
             "transition-all duration-300 ease-in-out",
-            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125", // Star color, opacity, and scale changes on hover
+            "group-hover:text-accent-foreground group-hover:opacity-75 group-hover:scale-125", // Star changes on hover
             star.className
           )}
           fill={star.fill ? "currentColor" : "none"}
-          style={{ animationDelay: star.animationDelay }}
+          style={{ animationDelay: star.animationDelay, animationDuration: star.animationDuration }}
         />
       ))}
 
@@ -72,8 +72,8 @@ export function SkillItem({ skill }: SkillItemProps) {
         <p className={cn(
           "text-base sm:text-lg font-headline",
           "transition-colors duration-300 ease-in-out",
-          "group-hover:text-primary",
-          "[text-shadow:0px_1px_2px_hsl(var(--foreground)/0.3)]" // Added subtle text shadow
+          "group-hover:text-primary", // Text color changes to primary red on hover
+          "[text-shadow:0px_1px_2px_hsl(var(--foreground)/0.3)]"
         )}>{name}</p>
       </div>
     </Card>
