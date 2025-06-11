@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Briefcase } from 'lucide-react';
+import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Briefcase, Server, Palette, PenTool, Star } from 'lucide-react';
 
 export interface Experience {
   id: string;
@@ -16,7 +16,6 @@ export interface Experience {
 
 export interface Skill {
   name: string;
-  level: number; // 0-100 for progress bar
   Icon?: LucideIcon;
 }
 
@@ -109,13 +108,12 @@ export const portfolioConfig: PortfolioConfig = {
     },
   ],
   skills: [
-    { name: "JavaScript / TypeScript", level: 95, Icon: Code },
-    { name: "React / Next.js", level: 90, Icon: Zap },
-    { name: "Node.js / Express", level: 85, Icon: Settings2 },
-    { name: "Python (AI/ML)", level: 80, Icon: Brain },
-    { name: "Databases (SQL/NoSQL)", level: 88, Icon: Database },
-    { name: "Cloud Platforms (AWS/GCP)", level: 75, Icon: Target },
-    { name: "UI/UX Design Principles", level: 70, Icon: Eye },
+    { name: "JavaScript / TypeScript", Icon: Code },
+    { name: "React / Next.js", Icon: Zap },
+    { name: "Node.js / Express", Icon: Server },
+    { name: "UI/UX Design Principles", Icon: Palette },
+    { name: "Data structures", Icon: Brain },
+    { name: "Figma/Zeplin", Icon: PenTool },
   ],
   socialLinks: [
     { platform: "GitHub", url: "https://github.com/tad-bit-better", Icon: Github },
