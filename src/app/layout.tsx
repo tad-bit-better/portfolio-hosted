@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 // For this case, we will wrap the content in page.tsx.
 
 export const metadata: Metadata = {
-  title: 'Pushpendra // Devcade - Level Up Your Projects!',
+  title: 'Pushpendra // Devcade',
   description: 'The retro-themed portfolio of Pushpendra Yadav. Enter the Devcade and explore awesome projects!',
 };
 
