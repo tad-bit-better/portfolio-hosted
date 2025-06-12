@@ -72,7 +72,8 @@ export function SkillItem({ skill }: SkillItemProps) {
         <p className={cn(
           "text-base sm:text-lg font-headline",
           "transition-colors duration-300 ease-in-out",
-          "group-hover:text-primary", // Text color changes to primary red on hover
+          "group-hover:text-primary", 
+          "group-hover:bg-foreground group-hover:px-2 group-hover:py-1 group-hover:rounded-sm", // Added black background on hover
           "[text-shadow:0px_1px_2px_hsl(var(--foreground)/0.3)]"
         )}>{name}</p>
       </div>
