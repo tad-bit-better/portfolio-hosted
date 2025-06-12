@@ -3,7 +3,6 @@
 'use server';
 
 import { z } from 'zod';
-// nodemailer is not used in this version
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters, brave adventurer!"),
@@ -58,3 +57,4 @@ export async function submitContactForm(
     fieldValues: { name: "", email: "", message: "" }, // Clear fields on success
   };
 }
+

@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Twitter, Code, Brain, Zap, Database, Target, Eye, Mail, User, MessageSquare, Gamepad2, Settings2, Trophy, Briefcase, Server, Palette, PenTool, Star } from 'lucide-react';
+import { Github, Linkedin, Code, Brain, Zap, Database, Mail, User, MessageSquare, Gamepad2, Server, Palette, PenTool, Star, Briefcase } from 'lucide-react';
 
 export interface Experience {
   id: string;
@@ -47,7 +47,7 @@ export const portfolioConfig: PortfolioConfig = {
     name: "Pushpendra Yadav",
     title: "Pixel Paladin & Code Commander",
     bio: "Player 1 ready! I'm a dev hero, battling buggy code monsters and crafting epic web quests. My power-ups include AI, full-stack mastery, and an insatiable hunger for new tech scrolls!",
-    profileImage: "https://lh3.google.com/u/1/d/1IGw77s1gqtRE77M30ucKHX_LDXiGQJkz=w3360-h1722-iv1",
+    profileImage: "https://lh3.google.com/u/1/d/1IGw77s1gqtRE77M30ucKHX_LDXiGQJkz=w3360-h1722-iv1?auditContext=prefetch",
     profileImageHint: "profile portrait",
   },
   experience: [
@@ -131,3 +131,4 @@ export const contactFormFields = {
   email: { Icon: Mail, placeholder: "Your Comms Link (Email)" },
   message: { Icon: MessageSquare, placeholder: "Your Message/Quest Log" },
 }
+
