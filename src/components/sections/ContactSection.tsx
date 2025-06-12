@@ -24,9 +24,9 @@ export function ContactSection({ contactConfig }: ContactSectionProps) {
             </CardHeader>
             <CardContent>
               {/* <ContactForm /> */}
-              <Alert className="mt-0 sm:mt-2 border-accent text-foreground bg-background/70 p-4 rounded-md">
-                <Mail className="h-6 w-6 text-accent" />
-                <AlertTitle className="font-headline text-xl text-accent mb-2">Direct Transmission Line!</AlertTitle>
+              <Alert className="mt-0 sm:mt-2 border-primary/50 text-foreground bg-background/70 p-4 rounded-md">
+                <Mail className="h-6 w-6 text-primary" />
+                <AlertTitle className="font-headline text-xl text-primary mb-2">Direct Transmission Line!</AlertTitle>
                 <AlertDescription className="text-base text-muted-foreground leading-relaxed">
                   The main comms console is temporarily offline for a pixel-perfect tune-up!
                   Fear not, brave adventurer, you can still send a high-priority databurst directly to Player 1 (Pushpendra)
