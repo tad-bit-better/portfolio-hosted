@@ -87,7 +87,7 @@ export const portfolioConfig: PortfolioConfig = {
     {
       id: "exp-deloitte",
       companyName: "Deloitte",
-      role: "Business Technology Analysts",
+      role: "Business Technology Analyst",
       dates: "April 2016 - March 2019",
       description: "Provided technology consulting services to various clients, assisting in digital transformation projects and system integrations. Specialized in enterprise application development and IT strategy.",
       logoUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Deloitte_Logo.png/330px-Deloitte_Logo.png",
