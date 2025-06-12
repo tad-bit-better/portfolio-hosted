@@ -13,7 +13,7 @@ export function AppFooter() {
           &copy; {currentYear} {portfolioConfig.personalInfo.name}. Game Over? Never!
         </p>
         <p className="text-sm text-muted-foreground/70 mt-1 flex items-center justify-center">
-          Crafted with <Gamepad2 className="w-4 h-4 mx-1 text-primary" /> and <Heart className="w-3 h-3 mx-1 text-accent fill-accent" /> using Next.js & Tailwind.
+          Crafted with <Gamepad2 className="w-4 h-4 mx-1 text-primary" /> and <Heart className="w-3 h-3 mx-1 text-accent fill-accent" /> by Pushpendra Yadav.
         </p>
       </div>
     </footer>
