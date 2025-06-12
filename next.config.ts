@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'lh3.google.com',
         port: '',
-        pathname: '/**',
+        pathname: '/u/**', // Made pathname more specific
       },
     ],
   },
