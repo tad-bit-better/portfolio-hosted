@@ -47,7 +47,7 @@ export const portfolioConfig: PortfolioConfig = {
     name: "Pushpendra Yadav",
     title: "Pixel Paladin & Code Commander",
     bio: "Player 1 ready! I'm a dev hero, battling buggy code monsters and crafting epic web quests. My power-ups include AI, full-stack mastery, and an insatiable hunger for new tech scrolls!",
-    profileImage: "https://placehold.co/300x300.png",
+    profileImage: "https://lh3.google.com/u/1/d/1IGw77s1gqtRE77M30ucKHX_LDXiGQJkz=w3360-h1722-iv1",
     profileImageHint: "profile portrait",
   },
   experience: [
