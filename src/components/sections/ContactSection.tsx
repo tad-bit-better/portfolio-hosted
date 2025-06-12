@@ -1,8 +1,9 @@
 
 import type { PortfolioConfig } from '@/config/portfolio.config';
-import { ContactForm } from '@/components/ContactForm';
+// import { ContactForm } from '@/components/ContactForm'; // Form is now disabled
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { MessageCircle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { MessageCircle, Mail } from 'lucide-react';
 
 interface ContactSectionProps {
   contactConfig: PortfolioConfig['contact'];
@@ -22,7 +23,18 @@ export function ContactSection({ contactConfig }: ContactSectionProps) {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ContactForm />
+              {/* <ContactForm /> */}
+              <Alert className="mt-0 sm:mt-2 border-accent text-foreground bg-background/70 p-4 rounded-md">
+                <Mail className="h-6 w-6 text-accent" />
+                <AlertTitle className="font-headline text-xl text-accent mb-2">Direct Transmission Line!</AlertTitle>
+                <AlertDescription className="text-base text-muted-foreground leading-relaxed">
+                  The main comms console is temporarily offline for a pixel-perfect tune-up!
+                  Fear not, brave adventurer, you can still send a high-priority databurst directly to Player 1 (Pushpendra)
+                  using this secure frequency: <strong className="text-primary font-semibold whitespace-nowrap">pushpendra.y2011@gmail.com</strong>.
+                  <br />
+                  Our tech gnomes are working to get the main channel back online with even more awesome features!
+                </AlertDescription>
+              </Alert>
             </CardContent>
           </Card>
         </div>
