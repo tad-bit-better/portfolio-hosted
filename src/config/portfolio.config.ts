@@ -24,7 +24,7 @@ export interface SideProject {
   technologies: string[];
   status?: 'Completed' | 'In Progress' | 'Concept';
   repoUrl?: string;
-  Icon?: LucideIcon;
+  iconKey?: 'gamepad2' | 'penTool' | 'palette' | 'sparkles'; // Changed from Icon to iconKey
 }
 
 export interface Skill {
@@ -128,11 +128,11 @@ export const portfolioConfig: PortfolioConfig = {
       description: "This very portfolio! A retro-themed interactive resume built with Next.js, Tailwind CSS, and a sprinkle of AI magic for tag suggestions.",
       imageUrl: "https://placehold.co/600x400.png",
       imageHint: "retro arcade game",
-      projectUrl: "#", // Link to itself or GitHub repo
+      projectUrl: "#", 
       technologies: ["Next.js", "React", "Tailwind CSS", "ShadCN UI", "Genkit", "TypeScript"],
       status: "Completed",
-      repoUrl: "https://github.com/tad-bit-better/devcade-portfolio", // Example
-      Icon: Gamepad2,
+      repoUrl: "https://github.com/tad-bit-better/devcade-portfolio",
+      iconKey: 'gamepad2', 
     },
     {
       id: "sp-ai-story-gen",
@@ -140,10 +140,10 @@ export const portfolioConfig: PortfolioConfig = {
       description: "A fun project exploring generative AI to create short, branching narrative stories based on user prompts. A weekend hack that turned into a mini-obsession!",
       imageUrl: "https://placehold.co/600x400.png",
       imageHint: "fantasy book quill",
-      projectUrl: "#", // Placeholder
+      projectUrl: "#", 
       technologies: ["Python", "Flask", "OpenAI API", "HTML/CSS"],
       status: "In Progress",
-      Icon: PenTool,
+      iconKey: 'penTool', 
     },
     {
       id: "sp-pixel-art-editor",
@@ -151,10 +151,10 @@ export const portfolioConfig: PortfolioConfig = {
       description: "A browser-based pixel art editor with basic tools, layer support, and GIF export. My attempt to recreate a simple version of Aseprite.",
       imageUrl: "https://placehold.co/600x400.png",
       imageHint: "pixel art character",
-      projectUrl: "#", // Placeholder
+      projectUrl: "#", 
       technologies: ["JavaScript", "HTML5 Canvas", "CSS"],
       status: "Concept",
-      Icon: Palette,
+      iconKey: 'palette', 
     }
   ],
   skills: [

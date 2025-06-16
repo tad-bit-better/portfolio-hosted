@@ -1,3 +1,4 @@
+
 // src/components/SideProjectCard.tsx
 'use client';
 
@@ -6,13 +7,23 @@ import type { SideProject } from '@/config/portfolio.config';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, GitFork, Sparkles, Tags, Info, CheckCircle, Clock, Lightbulb } from 'lucide-react'; // Added Lightbulb
+import { 
+  ExternalLink, GitFork, Sparkles, Tags, Info, CheckCircle, Clock, Lightbulb,
+  Gamepad2, PenTool, Palette // Explicitly import icons that can be mapped
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SideProjectCardProps {
   project: SideProject;
 }
+
+const iconMap: { [key: string]: LucideIcon } = {
+  gamepad2: Gamepad2,
+  penTool: PenTool,
+  palette: Palette,
+  sparkles: Sparkles, // Default or if 'sparkles' key is used
+};
 
 function getStatusInfo(status?: SideProject['status']): { text: string; Icon: LucideIcon; colorClass: string } {
   switch (status) {
@@ -28,7 +39,7 @@ function getStatusInfo(status?: SideProject['status']): { text: string; Icon: Lu
 }
 
 export function SideProjectCard({ project }: SideProjectCardProps) {
-  const { Icon: ProjectIcon = Sparkles } = project; // Default to Sparkles if no Icon provided
+  const ProjectIconComponent = (project.iconKey && iconMap[project.iconKey]) ? iconMap[project.iconKey] : Sparkles;
   const statusInfo = getStatusInfo(project.status);
 
   return (
@@ -48,7 +59,7 @@ export function SideProjectCard({ project }: SideProjectCardProps) {
         )}
         <div className="flex justify-between items-start">
             <CardTitle className="text-lg sm:text-xl font-headline flex items-center text-primary">
-                <ProjectIcon className="mr-2 h-5 w-5" />
+                <ProjectIconComponent className="mr-2 h-5 w-5" />
                 {project.name}
             </CardTitle>
             {project.status && (
