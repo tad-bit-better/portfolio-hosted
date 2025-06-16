@@ -25,12 +25,14 @@ export function SkillItem({ skill }: SkillItemProps) {
     <Card className={cn(
       "group",
       "shadow-md hover:shadow-lg transition-all duration-300 ease-in-out",
-      "animate-fade-in relative overflow-hidden",
+      // "animate-fade-in" removed as parent in SkillsSection handles initial fade-in
+      "opacity-85 group-hover:opacity-100", // Added for hover-based fade in/out
+      "relative overflow-hidden",
       "bg-card/80 backdrop-blur-sm border-primary/20",
       "aspect-[3/2] flex flex-col justify-center items-center p-4",
       "text-foreground",
-      "hover:bg-accent hover:text-accent-foreground", // Updated hover background and text
-      "transition-colors duration-300 ease-in-out"
+      "hover:bg-accent hover:text-accent-foreground",
+      "transition-colors duration-300 ease-in-out" // transition-all includes opacity
     )}>
       {Icon && (
         <Icon className={cn(
@@ -72,8 +74,8 @@ export function SkillItem({ skill }: SkillItemProps) {
         <p className={cn(
           "text-base sm:text-lg font-headline",
           "transition-colors duration-300 ease-in-out",
-          "group-hover:text-primary", 
-          "group-hover:bg-foreground group-hover:px-2 group-hover:py-1 group-hover:rounded-sm", // Added black background on hover
+          "group-hover:text-primary",
+          "group-hover:bg-foreground group-hover:px-2 group-hover:py-1 group-hover:rounded-sm",
           "[text-shadow:0px_1px_2px_hsl(var(--foreground)/0.3)]"
         )}>{name}</p>
       </div>
