@@ -1,4 +1,3 @@
-
 // src/components/SideProjectCard.tsx
 'use client';
 
@@ -7,7 +6,8 @@ import type { SideProject } from '@/config/portfolio.config';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, GitFork, Sparkles, Tags, Info, CheckCircle, Clock } from 'lucide-react'; // Added Info, CheckCircle, Clock
+import { ExternalLink, GitFork, Sparkles, Tags, Info, CheckCircle, Clock, Lightbulb } from 'lucide-react'; // Added Lightbulb
+import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface SideProjectCardProps {
