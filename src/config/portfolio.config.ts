@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { Github, Linkedin, Code, Brain, Zap, Database, Mail, User, MessageSquare, Gamepad2, Server, Palette, PenTool, Star, Briefcase } from 'lucide-react';
+import { Github, Linkedin, Code, Brain, Zap, Database, Mail, User, MessageSquare, Gamepad2, Server, Palette, PenTool, Star, Briefcase, Wand2, Sparkles, Tags, GitFork, Lightbulb } from 'lucide-react';
 
 export interface Experience {
   id: string;
@@ -12,6 +12,19 @@ export interface Experience {
   logoHint?: string;
   companyUrl: string;
   technologies: string[];
+}
+
+export interface SideProject {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+  imageHint?: string;
+  projectUrl: string;
+  technologies: string[];
+  status?: 'Completed' | 'In Progress' | 'Concept';
+  repoUrl?: string;
+  Icon?: LucideIcon;
 }
 
 export interface Skill {
@@ -34,6 +47,7 @@ export interface PortfolioConfig {
     profileImageHint?: string;
   };
   experience: Experience[];
+  sideProjects: SideProject[];
   skills: Skill[];
   socialLinks: SocialLink[];
   contact: {
@@ -47,7 +61,7 @@ export const portfolioConfig: PortfolioConfig = {
     name: "Pushpendra Yadav",
     title: "Pixel Paladin & Code Commander",
     bio: "Player 1 ready! I'm a dev hero, battling buggy code monsters and crafting epic web quests. My power-ups include AI, full-stack mastery, and an insatiable hunger for new tech scrolls!",
-    profileImage: "https://i.ibb.co/Vcb9rNX4/ezgif-115b7d4d957521.gif",
+    profileImage: "https://i.ibb.co/HcmDCdd/Gemini-Generated-Image-gmny9tgmny9tgmny.png",
     profileImageHint: "profile portrait",
   },
   experience: [
@@ -107,6 +121,42 @@ export const portfolioConfig: PortfolioConfig = {
       technologies: ["Java", "Hibernate", "JSP", "Servlet", "Struts"],
     },
   ],
+  sideProjects: [
+    {
+      id: "sp-devcade",
+      name: "Devcade Portfolio",
+      description: "This very portfolio! A retro-themed interactive resume built with Next.js, Tailwind CSS, and a sprinkle of AI magic for tag suggestions.",
+      imageUrl: "https://placehold.co/600x400.png",
+      imageHint: "retro arcade game",
+      projectUrl: "#", // Link to itself or GitHub repo
+      technologies: ["Next.js", "React", "Tailwind CSS", "ShadCN UI", "Genkit", "TypeScript"],
+      status: "Completed",
+      repoUrl: "https://github.com/tad-bit-better/devcade-portfolio", // Example
+      Icon: Gamepad2,
+    },
+    {
+      id: "sp-ai-story-gen",
+      name: "AI Story Weaver",
+      description: "A fun project exploring generative AI to create short, branching narrative stories based on user prompts. A weekend hack that turned into a mini-obsession!",
+      imageUrl: "https://placehold.co/600x400.png",
+      imageHint: "fantasy book quill",
+      projectUrl: "#", // Placeholder
+      technologies: ["Python", "Flask", "OpenAI API", "HTML/CSS"],
+      status: "In Progress",
+      Icon: PenTool,
+    },
+    {
+      id: "sp-pixel-art-editor",
+      name: "PixelCraft Studio",
+      description: "A browser-based pixel art editor with basic tools, layer support, and GIF export. My attempt to recreate a simple version of Aseprite.",
+      imageUrl: "https://placehold.co/600x400.png",
+      imageHint: "pixel art character",
+      projectUrl: "#", // Placeholder
+      technologies: ["JavaScript", "HTML5 Canvas", "CSS"],
+      status: "Concept",
+      Icon: Palette,
+    }
+  ],
   skills: [
     { name: "JavaScript / TypeScript", Icon: Code },
     { name: "React / Next.js", Icon: Zap },
@@ -131,4 +181,3 @@ export const contactFormFields = {
   email: { Icon: Mail, placeholder: "Your Comms Link (Email)" },
   message: { Icon: MessageSquare, placeholder: "Your Message/Quest Log" },
 }
-
