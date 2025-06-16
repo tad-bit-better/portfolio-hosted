@@ -22,7 +22,7 @@ function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md shadow-sm p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" className="text-2xl font-bold font-headline text-primary hover:text-accent transition-colors flex items-center">
+        <Link href="/" className="text-xl sm:text-2xl font-bold font-headline text-primary hover:text-accent transition-colors flex items-center">
           <Gamepad2 className="mr-2 h-6 w-6" /> {portfolioConfig.personalInfo.name.split(' ')[0]}'s // Devcade
         </Link>
         <div className="hidden md:flex space-x-2">

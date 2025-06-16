@@ -11,7 +11,7 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
   return (
     <section id="skills" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-primary flex items-center justify-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-primary flex items-center justify-center">
           <Zap className="mr-3 h-8 sm:h-10 w-8 sm:w-10" /> My Power-Ups
         </h2>
         {skills.length > 0 ? (

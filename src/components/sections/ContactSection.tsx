@@ -17,7 +17,7 @@ export function ContactSection({ contactConfig }: ContactSectionProps) {
           <Card className="shadow-xl border-primary/20 animate-fade-in">
             <CardHeader className="text-center">
               <MessageCircle className="mx-auto h-12 w-12 text-accent mb-4" />
-              <CardTitle className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">Open Comms Channel</CardTitle>
+              <CardTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">Open Comms Channel</CardTitle>
               <CardDescription className="text-lg text-muted-foreground mt-2">
                 {contactConfig.introText}
               </CardDescription>

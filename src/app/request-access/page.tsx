@@ -158,7 +158,7 @@ export default function RequestAccessPage() {
       <Card className="w-full max-w-md shadow-xl">
         <CardHeader className="text-center">
           <KeyRound className="mx-auto h-12 w-12 text-primary mb-4" />
-          <CardTitle className="text-2xl md:text-3xl font-bold">Secret Dev Zone</CardTitle>
+          <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold">Secret Dev Zone</CardTitle>
           <CardDescription className="text-muted-foreground">
             This area is for VIPs only! Got a Guest ID or need to request one?
           </CardDescription>

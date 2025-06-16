@@ -28,7 +28,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
             />
           </div>
           <div>
-            <CardTitle className="text-xl font-headline flex items-center">
+            <CardTitle className="text-lg sm:text-xl font-headline flex items-center">
               <Briefcase className="mr-2 h-5 w-5 text-primary" />{experience.role}
             </CardTitle>
             <p className="text-base text-muted-foreground font-semibold">{experience.companyName}</p>

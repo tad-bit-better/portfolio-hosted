@@ -11,7 +11,7 @@ export function ExperienceSection({ experience }: ExperienceSectionProps) {
   return (
     <section id="experience" className="py-16 md:py-24 bg-card">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-16 text-primary flex items-center justify-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 text-primary flex items-center justify-center">
           <Briefcase className="mr-3 h-8 sm:h-10 w-8 sm:w-10" /> My Career Saga
         </h2>
         {experience.length > 0 ? (
