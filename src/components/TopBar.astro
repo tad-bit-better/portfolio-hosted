@@ -1,0 +1,47 @@
+---
+import { person } from '../data/profile';
+
+interface Props {
+  mode: 'read' | 'play';
+}
+const { mode } = Astro.props;
+const play = mode === 'play';
+---
+
+<header class:list={['topbar', play ? 'topbar-play' : 'topbar-read']}>
+  <div
+    class="wrap"
+    style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; min-height: 68px"
+  >
+    <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit">
+      <span class="pled"></span>
+      <span style="font-weight: 600; font-size: 16px; letter-spacing: -0.01em">{person.name}</span>
+      <span class="mono" style="font-size: 12px; opacity: 0.6">/ staff frontend</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
+      {
+        !play && (
+          <nav aria-label="Sections" style="display: flex; gap: 18px; flex-wrap: wrap">
+            <a class="navlink" href="#work">Work</a>
+            <a class="navlink" href="#log">Experience</a>
+            <a class="navlink" href="#how">How I work</a>
+            <a class="navlink" href="#contact">Contact</a>
+          </nav>
+        )
+      }
+      <a
+        class="modeswitch"
+        href={play ? '/' : '/play'}
+        aria-label={play ? 'Switch to Read mode' : 'Switch to Play mode'}
+      >
+        <span class:list={{ 'ms-dim': play }}>Read</span>
+        <span class="ms-track">
+          <span
+            class="ms-knob"
+            style={`transform: translateX(${play ? 24 : 0}px)`}></span>
+        </span>
+        <span class:list={{ 'ms-dim': !play }}>Play</span>
+      </a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,18 @@
+---
+/**
+ * Renders text, turning ==phrase== into a hand-highlighter mark.
+ * Pass `onLoad` for marks above the fold (they draw on page load, not on scroll).
+ */
+interface Props {
+  text: string;
+  onLoad?: boolean;
+}
+const { text, onLoad = false } = Astro.props;
+const parts = text.split(/==(.+?)==/g);
+---
+
+{
+  parts.map((part, i) =>
+    i % 2 === 1 ? <span class:list={['hl', { 'hl-load': onLoad }]}>{part}</span> : part,
+  )
+}

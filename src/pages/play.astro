@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import StaffQuest from '../components/play/StaffQuest.tsx';
+import '@fontsource/vt323';
+import '@fontsource/press-start-2p';
+import '../styles/shared.css';
+import '../styles/play.css';
+---
+
+<Base
+  theme="play"
+  title="Staff Quest · Pushpendra Yadav"
+  description="The playful version of Pushpendra Yadav's portfolio: a vintage TV with an 8-bit platformer inside."
+>
+  <TopBar mode="play" />
+  <StaffQuest client:load />
+  <noscript>
+    <p style="text-align: center; padding: 24px">
+      The TV needs JavaScript. The full portfolio is in <a href="/">Read mode</a>.
+    </p>
+  </noscript>
+</Base>

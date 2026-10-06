@@ -1,0 +1,40 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  theme: 'read' | 'play';
+}
+const { title, description, theme } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" data-mode={theme}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content={theme === 'read' ? '#F3F2EE' : '#161513'} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <!-- Zero-JS page morphs (CSS cross-document view transitions) and hover prerendering. -->
+    <script type="speculationrules" is:inline>
+      {
+        "prerender": [{ "where": { "href_matches": ["/", "/play"] }, "eagerness": "moderate" }]
+      }
+    </script>
+  </head>
+  <body class={theme === 'read' ? 'body-read' : 'body-play'}>
+    <slot />
+  </body>
+</html>
