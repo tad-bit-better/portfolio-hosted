@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.body-read {
+  background: #f3f2ee;
+  color: #131312;
+}
+
+.body-play {
+  background: #161513;
+  color: #e9e4d8;
+}
+
+:focus-visible {
+  outline: 2px solid #e8451e;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Cross-document view transitions: the Read/Play switch morphs between pages without JS. */
+@view-transition {
+  navigation: auto;
+}
+.topbar {
+  view-transition-name: topbar;
+}
+.ms-knob {
+  view-transition-name: mode-knob;
+}
+::view-transition-group(mode-knob) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

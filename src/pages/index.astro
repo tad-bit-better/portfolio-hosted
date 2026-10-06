@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+import TopBar from '../components/TopBar.astro';
+import Marked from '../components/Marked.astro';
+import { person, spec, figures, work, experience, principles } from '../data/profile';
+import '../styles/shared.css';
+import '../styles/read.css';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Base
+  theme="read"
+  title="Pushpendra Yadav · Staff Frontend Engineer"
+  description="Staff frontend engineer and engineering lead: React and TypeScript platforms, design systems, micro-frontends, performance and AI-native workflows."
+>
+  <TopBar mode="read" />
+
+  <main id="top">
+    <section class="wrap" style="padding-top: clamp(56px, 9vw, 120px); padding-bottom: 72px">
+      <div class="hero-grid">
+        <div>
+          <div class="over"><span class="pled"></span>Open to Staff Frontend / Frontend Architect roles</div>
+          <h1 class="h1">
+            I build the frontend platforms <span class="hl-under hl-load">other engineers build on.</span>
+          </h1>
+          <p class="lede">
+            Staff frontend engineer and engineering lead. Twelve years of React and TypeScript at
+            scale: design systems, micro-frontends, performance, and AI-native workflows. Five of
+            those years also <span class="hl hl-load">running pods of 5–6 engineers.</span>
+          </p>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px">
+            <a class="btn btn-ink" href={`mailto:${person.email}`}>
+              Start a conversation
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+            </a>
+            <a class="btn btn-line" href={person.resumeUrl}>Résumé (PDF)</a>
+          </div>
+        </div>
+        <div class="spec" aria-label="Spec sheet">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase">
+            <span>Spec sheet</span><span style="color: #8A8880">Rev. 2026</span>
+          </div>
+          {
+            spec.map((row) => (
+              <div class="spec-row">
+                <span class="spec-k">{row.k}</span>
+                <span class="spec-fill" />
+                <span class="spec-v">{row.v}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="figs">
+        {
+          figures.map((f, i) => (
+            <div class="fig" style={i > 0 ? 'padding-left: 24px' : undefined}>
+              <div class="fig-n">
+                {f.n}
+                <small>{f.unit}</small>
+              </div>
+              <div class="fig-l">
+                <Marked text={f.label} />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="work" class="wrap" style="padding-top: 120px">
+      <div class="sec-head">
+        <h2 class="sec-t">Recent milestone work</h2>
+        <span class="over">{pad(work.length)} entries · 2020 → now</span>
+      </div>
+      <div style="border-bottom: 1px solid #DAD8D0">
+        {
+          work.map((w, i) => (
+            <a class="row" href={w.href} {...(w.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}>
+              <span class="row-i">{pad(i + 1)}</span>
+              <div>
+                <div class="row-name">{w.name}</div>
+                <div class="row-d">
+                  <Marked text={w.desc} />
+                </div>
+              </div>
+              <div class="tags">
+                {w.tags.map((t) => (
+                  <span class="tag">{t}</span>
+                ))}
+              </div>
+              <span class="yr">{w.meta}</span>
+              <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M8 7h9v9" />
+              </svg>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="log" class="wrap" style="padding-top: 120px">
+      <div class="sec-head">
+        <h2 class="sec-t">Experience</h2>
+        <span class="over">12 years · 6 teams</span>
+      </div>
+      <div style="border-bottom: 1px solid #DAD8D0">
+        {
+          experience.map((x) => (
+            <div class="xp">
+              <span class="xp-y">{x.years}</span>
+              <span class="xp-c">{x.company}</span>
+              <span class="xp-r">
+                {Array.isArray(x.role)
+                  ? x.role.map((r) => (typeof r === 'string' ? r : <a href={r.href}>{r.text}</a>))
+                  : x.role}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="how" class="wrap" style="padding-top: 120px; padding-bottom: 140px">
+      <div class="sec-head">
+        <h2 class="sec-t">How I work</h2>
+        <span class="over">Four habits</span>
+      </div>
+      <div class="princ">
+        {
+          principles.map((p, i) => (
+            <div class="pcard">
+              <div class="pcard-n">{pad(i + 1)}</div>
+              <h3 class="pcard-t">{p.title}</h3>
+              <p class="pcard-d">
+                <Marked text={p.body} />
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <footer id="contact" class="foot">
+      <div class="wrap" style="padding-top: 110px; padding-bottom: 56px">
+        <div class="over" style="color: #A8A69E">Contact</div>
+        <p style="margin: 18px 0 28px; font-size: 20px; color: #C9C7BF; max-width: 560px; line-height: 1.5">
+          Hiring for frontend strategy, platform standards or AI-augmented workflows? Write to me.
+        </p>
+        <a class="mail" href={`mailto:${person.email}`}>{person.email}</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 96px; padding-top: 24px; border-top: 1px solid #34332F">
+          <div class="mono" style="display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px">
+            {person.links.map((l) => <a href={l.href}>{l.label}</a>)}
+          </div>
+          <a class="hintbtn" href="/play" style="text-decoration: none">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"></rect><path d="M8 2l4 4 4-4"></path></svg>
+            Prefer knobs? There's a TV in Play mode
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Base>
