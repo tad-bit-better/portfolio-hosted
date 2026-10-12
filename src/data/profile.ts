@@ -83,9 +83,9 @@ export const experience: { years: string; company: string; role: string | RolePa
     years: '2026 — now',
     company: 'Independent',
     role: [
-      'Open-source products, end to end: ',
+      'Products, end to end: ',
       { text: 'Because I liked', href: 'https://becauseiliked.com' },
-      ', ',
+      '; open source: ',
       { text: 'Thumbline', href: 'https://thumbline.app' },
       ', ',
       { text: 'VitalDelta', href: 'https://vitaldelta.app' },
@@ -147,7 +147,7 @@ export const stages: Stage[] = [
       { label: '2014–19 NENO · DELOITTE', title: '2014–2019', body: 'Vehicle tracking at Nenosystems in Indore, then US public-healthcare systems and Salesforce React components at Deloitte.' },
       { label: '2020–22 TECH LEAD ×2', title: '2020–2022', body: 'Technical Lead at Datafoundry AI (micro-frontend pharmacovigilance platform) and Ferns and Petals (high-traffic ecommerce).' },
       { label: '2022–26 LEENA AI', title: '2022–2026 · Leena AI', body: 'Tech Lead / Frontend Lead running a pod of 5–6+ engineers: capacity planning, reviews, promotions and hiring.' },
-      { label: '2026 INDEPENDENT', title: '2026 → now', body: 'Designing and shipping open-source, privacy-first products end to end, plus the Coodlesome.com storefront.' },
+      { label: '2026 INDEPENDENT', title: '2026 → now', body: 'Designing and shipping products end to end: Because I liked, the open-source Thumbline and VitalDelta, and the Coodlesome.com storefront.' },
     ],
   },
   {
