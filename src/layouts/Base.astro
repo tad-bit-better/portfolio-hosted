@@ -10,6 +10,9 @@ interface Props {
 }
 const { title, description, theme } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Link-preview card (WhatsApp, LinkedIn, Slack, X, iMessage). Crawlers need an absolute URL.
+const ogImage = new URL('/og.png', Astro.site);
+const ogImageAlt = 'Pushpendra Yadav · Staff Frontend Engineer: I build the frontend platforms other engineers build on.';
 ---
 
 <!doctype html>
@@ -26,7 +29,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:site_name" content="Pushpendra Yadav" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <!-- Zero-JS page morphs (CSS cross-document view transitions) and hover prerendering. -->
     <script type="speculationrules" is:inline>
       {
