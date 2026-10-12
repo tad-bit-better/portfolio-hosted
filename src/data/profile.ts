@@ -33,6 +33,13 @@ export const figures = [
 
 export const work = [
   {
+    name: 'Because I liked',
+    href: 'https://becauseiliked.com',
+    desc: 'Describe something you loved and why. Embeddings find candidates across films, shows, books and games, and an LLM ==explains every pick against your why.==',
+    tags: ['Next.js', 'Supabase', 'pgvector', 'RAG'],
+    meta: '2026 · live',
+  },
+  {
     name: 'VitalDelta',
     href: 'https://vitaldelta.app',
     desc: 'Lab-report PDFs become per-marker trend charts. No backend, no accounts: a strict CSP makes the ==no-network promise verifiable.==',
@@ -77,6 +84,8 @@ export const experience: { years: string; company: string; role: string | RolePa
     company: 'Independent',
     role: [
       'Open-source products, end to end: ',
+      { text: 'Because I liked', href: 'https://becauseiliked.com' },
+      ', ',
       { text: 'Thumbline', href: 'https://thumbline.app' },
       ', ',
       { text: 'VitalDelta', href: 'https://vitaldelta.app' },
@@ -116,6 +125,7 @@ export const stages: Stage[] = [
   {
     name: 'THE WORK', zone: 'MIDNIGHT METRO', guide: 'The Work', theme: 'city',
     items: [
+      { label: 'BECAUSE I LIKED', title: 'Because I liked · becauseiliked.com', body: 'Describe something you loved and why. Embeddings in Postgres and pgvector find candidates across films, shows, books and games, and an LLM explains how each pick fits your why.' },
       { label: 'VITALDELTA', title: 'VitalDelta · vitaldelta.app', body: 'Turns lab-report PDFs into per-marker trend charts. Local-first: no backend, no accounts, and a strict CSP makes the no-network guarantee verifiable.' },
       { label: 'THUMBLINE', title: 'Thumbline · thumbline.app', body: 'Listens to a song clip and writes playable guitar arrangements in three styles. Audio analysis runs in the browser on WebAssembly, in an Nx monorepo.' },
       { label: 'LEENA AI PLATFORM', title: 'Leena AI frontend platform', body: 'Architecture, design system and micro-frontends for an enterprise HR suite across 5+ product lines. Webpack 4→5 and Module Federation, moved by codemods.' },
